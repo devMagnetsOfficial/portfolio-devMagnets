@@ -3,7 +3,7 @@ import { FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
 
 export default  function LeftMenu(){
     return(<>
-       <div className="font-sans capitalize w-[300px] text-white text-sm   border-2 h-[100vh]  ">
+       <div className="capitalize w-[300px] text-white text-sm   border-2 h-[100vh]  ">
 
 
       {/* brief bio */}

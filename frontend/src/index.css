@@ -7,3 +7,6 @@
   width: 0px; /* width of scrollbar */
   height: 0px; /* for horizontal scrollbar */
 }
+*{
+  font-family: sans-serif;
+}
