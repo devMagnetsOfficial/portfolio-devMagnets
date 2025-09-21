@@ -1,5 +1,5 @@
 @tailwind base;
-@tailwind component;
+@tailwind components;
 @tailwind utilities;
 
 /* global.css or index.css */
@@ -7,5 +7,3 @@
   width: 0px; /* width of scrollbar */
   height: 0px; /* for horizontal scrollbar */
 }
-
-
