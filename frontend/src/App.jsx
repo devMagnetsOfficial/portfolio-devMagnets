@@ -1,9 +1,11 @@
 import LeftMenu from "./component/LeftMenu"
 import RightMenu from "./component/RightMenu"
+import Footer from "./component/Footer"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 export default function App() {
   return (<>
-    <BrowserRouter>
+  <Footer/>
+    {/* <BrowserRouter>
       <Routes>
         <Route path='/' element={<RightMenu />} />
         <Route path='/portfolio' element={<RightMenu />} />
@@ -12,11 +14,9 @@ export default function App() {
         <Route path='/contact' element={<RightMenu />} />
         <Route path='/donate' element={<RightMenu />} />
         <Route path='/mentorship' element={<RightMenu />} />
-
         <Route path='*' element={<><div>page is under construction</div></>} />
       </Routes>
-    </BrowserRouter>
-
+    </BrowserRouter> */}
   </>)
 
 }
