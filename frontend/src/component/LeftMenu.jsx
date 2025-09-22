@@ -10,7 +10,7 @@ export default function LeftMenu() {
   }
   return (<>
 
-    <div className={`capitalize ${isMenuClicked?' w-[200px] md:w-[300px] h-[100vh]':'w-10 h-[0px] '} transition-all duration-1000 ease-in-out text-white text-sm bg-dark flex-col flex justify-between   absolute md:relative `}>
+    <div className={`capitalize ${isMenuClicked?' w-[200px] md:w-[300px] h-[100vh]':'w-10 h-[0px] '} transition-[width] duration-1000 ease-in-out text-white text-sm bg-dark flex-col flex justify-between   absolute md:relative `}>
       <PiDotsThreeVerticalBold onClick={setMenu} className="md:hidden text-xl absolute h-[70px] right-2 " />
    
         {isMenuClicked&&<>
