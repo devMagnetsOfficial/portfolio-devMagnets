@@ -12,7 +12,7 @@ export default function RightMenu() {
     return (<>
 
         <div className={`bg-darkGray   ${isMenubarClicked ? 'w-[250px] h-[100vh]' : 'w-[50px] h-[0px] '} transition-[width] duration-1000 ease-in-out absolute    right-0`}>
-            <div className={`bg-dark flex ${isMenubarClicked ? 'pl-4' : 'justify-center'} h-[70px] items-center`}>
+            <div  className={`bg-dark flex ${isMenubarClicked ? 'pl-4' : 'justify-center'} h-[70px] items-center`}>
                 {isMenubarClicked ?
                     <MdClose className="md:text-2xl text-textSecondary" onClick={setMenubar} />
                     :
@@ -26,7 +26,7 @@ export default function RightMenu() {
 
                 {isMenubarClicked &&
                     <>
-                        <div className="flex flex-col w-full">
+                        <div onClick={setMenubar} className="flex flex-col w-full">
                             <div className="mt-[100px]  w-full p-5 text-sm ">
                                 <ul className="flex flex-col gap-2 ">
                                     <NavLink to='/' className={({ isActive }) => (isActive ? 'text-white font-semibold' : '')}>Home</NavLink>
