@@ -7,7 +7,7 @@ export default {
         // Backgrounds
         dark: '#1f222b',       // main background
         darkSecondary: '#22252e', // secondary sections
-        card: '#292c35',       // cards, panels
+        card:'rgb(255 255 255 / 0.1)',       // cards, panels
         darkGray: '#2a2d36',   // subtle dividers
 
         // Text

@@ -27,7 +27,7 @@ export default function LeftMenu() {
         </div>
 
         {/* scroll inside brief bio and social media link */}
-        <div className="h-[55%] p-4 overflow-scroll overflow-x-hidden bg-darkGray ">
+        <div className="h-[55%] p-4 overflow-scroll overflow-x-hidden bg-white/10 ">
 
           {/* basic address and detail */}
           <div className=" flex flex-col gap-2 ">
