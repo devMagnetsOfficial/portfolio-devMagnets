@@ -9,14 +9,14 @@ export default function Portfolio() {
             {/* contact information */}
             <h1 className="text-xl mb-5">portfolio</h1>
             {/* filter */}
-            <ul className="grid grid-cols-2 text-xs gap-2 md:grid-cols-5  md:text-sm  mb-5">
+            <ul className="grid grid-cols-2 text-xs gap-2 lg:grid-cols-5  lg:text-sm  mb-5">
                 <li>All categories</li>
                 <li>web templates</li>
                 <li>ui elements</li>
                 <li>logos</li>
                 <li>drawing</li>
             </ul>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 <div onMouseEnter={ProjectHover} onMouseLeave={ProjectHover} className="min-h-[250px]  relative ">
                     <img className="w-full h-full" src="https://arter.bslthemes.com/wp-content/uploads/2020/09/work-1.jpg" alt="" />
                     {

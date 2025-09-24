@@ -1,20 +1,38 @@
 import { FaDownload, FaGithub, FaLinkedin, FaCheck } from "react-icons/fa";
 import { FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function LeftMenu() {
   const [isMenuClicked, setMenuClicked] = useState(true)
+
+  useEffect(() => {
+
+    handleScreen()
+     window.addEventListener("resize", handleScreen)
+
+  // cleanup
+  return () => window.removeEventListener("resize", handleScreen)
+  }, [])
+
+    const handleScreen = () => {
+      if (window.innerWidth >= 768) {
+        setMenuClicked(true)
+      }
+      else {
+        setMenuClicked(false)
+      }
+    }
 
   const setMenu = () => {
     setMenuClicked(!isMenuClicked)
   }
   return (<>
 
-    <div className={`capitalize ${isMenuClicked?' w-[200px] md:w-[300px] h-[100vh]':'w-10 h-[0px] '} transition-[width] duration-1000 ease-in-out text-white text-sm bg-dark flex-col flex justify-between   absolute md:relative `}>
-      <PiDotsThreeVerticalBold onClick={setMenu} className="md:hidden text-xl absolute h-[70px] right-2 " />
-   
-        {isMenuClicked&&<>
-           {/* brief bio */}
+    <div className={`capitalize ${isMenuClicked ? ' w-[min(70%,300px)] lg:w-[300px] h-[100vh] ' : 'w-10 h-[0px] '} transition-[width] duration-1000 ease-in-out z-10 text-white text-sm bg-dark flex-col flex justify-between   absolute lg:relative `}>
+      <PiDotsThreeVerticalBold onClick={setMenu} className="lg:hidden text-xl absolute h-[70px] right-2 " />
+
+      {isMenuClicked && <>
+        {/* brief bio */}
         <div className="bg-dark flex items-center justify-center h-[35%] ">
           <div className="flex flex-col items-center gap-2">
             <img className="w-[100px] rounded-[100%]" src="https://pics.craiyon.com/2023-12-13/y2y9z8iKQp-lMupp8bBypg.webp" alt="" />
@@ -141,8 +159,8 @@ export default function LeftMenu() {
 
           {/* download cv button */}
           <div>
-            <button className="flex gap-2  w-full items-center" type="button">
-              <span>Download cv</span>
+            <button className="flex gap-2 capitalize  w-full items-center" type="button">
+              <a href="srs.pdf" download="srs.pdf" >download cv</a>
               <FaDownload className="text-xs" />
             </button>
           </div>
@@ -161,13 +179,13 @@ export default function LeftMenu() {
             <li><a href=""><FaLinkedin /></a></li>
           </ul>
         </div>
-        
-        </>}
 
-     
+      </>}
 
 
- 
+
+
+
 
     </div>
 

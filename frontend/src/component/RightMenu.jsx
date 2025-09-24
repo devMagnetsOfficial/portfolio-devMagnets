@@ -1,8 +1,12 @@
 
-import { NavLink } from 'react-router-dom'
+import { NavLink,useLocation } from 'react-router-dom'
 import { useState } from "react"
 import { MdMenu, MdClose } from 'react-icons/md'
 export default function RightMenu() {
+
+    const pathname=useLocation().pathname
+    const page=pathname=='/'?'home':pathname.replace('/','')
+
 
     const [isMenubarClicked, setMenubarClicked] = useState(false)
     const setMenubar = () => {
@@ -11,18 +15,18 @@ export default function RightMenu() {
 
     return (<>
 
-        <div className={`bg-darkGray   ${isMenubarClicked ? 'w-[250px] h-[100vh]' : 'w-[50px] h-[0px] '} transition-[width] duration-1000 ease-in-out absolute    right-0`}>
+        <div className={`bg-darkGray   ${isMenubarClicked ? 'w-[250px] h-[100vh]' : 'w-[50px] h-[0px] '} transition-[width] duration-1000 ease-in-out absolute z-[3]   right-0`}>
             <div  className={`bg-dark flex ${isMenubarClicked ? 'pl-4' : 'justify-center'} h-[70px] items-center`}>
                 {isMenubarClicked ?
-                    <MdClose className="md:text-2xl text-textSecondary" onClick={setMenubar} />
+                    <MdClose className="lg:text-2xl text-textSecondary" onClick={setMenubar} />
                     :
-                    <MdMenu className="md:text-2xl text-textSecondary" onClick={setMenubar} />
+                    <MdMenu className="lg:text-2xl text-textSecondary" onClick={setMenubar} />
                 }
 
             </div>
 
             <div className="flex justify-center   items-center  text-textSecondary uppercase  min-h-[100px]">
-               {!isMenubarClicked&& <div className={` rotate-90 md:block  hidden`}>home</div>}
+               {!isMenubarClicked&& <div className={` rotate-90 lg:block  hidden`}>{page}</div>}
 
                 {isMenubarClicked &&
                     <>
