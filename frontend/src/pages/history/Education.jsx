@@ -4,7 +4,8 @@ export default function Education() {
             <div className="text-xl text-textPrimary capitalize mb-5">Education</div>
             <div className="flex  flex-col gap-5 w-fit lg:w-fit mb-10 relative ">
                 <div className="text-card w-2 h-full bg-card rounded-xl absolute -right-10"></div>
-                <div className=" text-textPrimary  lg:lg:w-[30vw]  flex flex-col gap-4 p-8 text-sm bg-white/10">
+
+                <div className=" text-textPrimary  lg:w-[30vw]  flex flex-col gap-4 p-8 text-sm bg-white/10">
                     <div className="flex justify-between relative  items-center">
                         <div>
                             <h1 className="font-semibold">Web development</h1>
