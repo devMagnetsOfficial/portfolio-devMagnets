@@ -3,12 +3,14 @@ const cors = require('cors')
 
 const app = express()
 const ejs=require('ejs')
+app.set('view engine','ejs')
+app.set('views','./mail')
 require('dotenv').config({})
 app.use(express.json())
 app.use(cors())
 const nodemailer = require('nodemailer')
 app.get('/', (req, res) => {
-    res.send('server is running buddy ')
+   res.render('responseMailTemplate.ejs',{name:'abhishek',message:'i want your service'})
 })
 app.post('/sendMail', async (req, res) => {
     console.log('req.body:', req.body);
