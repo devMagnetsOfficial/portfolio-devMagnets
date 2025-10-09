@@ -1,4 +1,4 @@
-import Intro from "./intro"
+import Intro from "./Intro"
 import Service from "./Service"
 import Pricing from "./Pricing"
 import Recommendation from "./Recommendation"
