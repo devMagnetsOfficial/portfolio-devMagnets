@@ -1,5 +1,5 @@
 import RightMenu from "./component/RightMenu"
-import Home from "./pages/Home/Home"
+import Home from "./pages/home/Home"
 import PublicLayout from "./layout/PublicLayout"
 import Contact from "./pages/contact/Contact"
 import Portfolio from "./pages/portfolio/Portfolio"
