@@ -1,19 +1,10 @@
 import { FaStar } from "react-icons/fa6";
 import { FaLessThan, FaGreaterThan } from "react-icons/fa";
 import { useState } from "react";
-
+import Recommendations from "./recommendData";
 
 export default function Recommendation() {
-    const Recommendation = [
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 3 },
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 5 },
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 4 },
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 5 },
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 4 },
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 4 },
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 5 },
-        { name: 'web development', designation: 'author', desc: 'lorem10', rate: 4 }
-    ]
+
     const star = (rate, element) => {
         let stars = []
         for (let i = 1; i <= rate; i++) {
@@ -31,7 +22,7 @@ export default function Recommendation() {
 
                 {/* cards */}
                 {
-                    Recommendation.map((items, idx) => (
+                    Recommendations.map((items, idx) => (
                        
                        <div key={idx} className=" flex w-[calc(100%-30px)] lg:w-[calc(50%-30px)]  flex-shrink-0  flex-col gap-4 p-8 text-sm bg-white/10 min-h-[70%]  relative ">
                             <div className="flex justify-between items-center">
@@ -58,7 +49,7 @@ export default function Recommendation() {
             {/* slider with button  */}
             <div className=" text-textPrimary flex justify-between mb-5">
                 <div className="flex gap-2">
-                    {Recommendation.map((element, i) => (
+                    {Recommendations.map((element, i) => (
                         <span key={i}  className={ "cursor-pointer transition-all duration-300 ease-in-out bg-accent w-5 rounded-xl h-1  font-bold" }>
                         </span>
                     ))}

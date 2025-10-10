@@ -1,43 +1,5 @@
+import educations from "./educationData"
 export default function Education() {
-
-    const educations = [
-        {
-            title: "Web Development",
-            author: "Author",
-            duration: "Jan 2018 - Jan 2023",
-            description: "Tempore Hic Expedita Adipisci Vel Aliquam! Sapiente Veritatis Libero Eos Quibusdam Natus Nemo Incidunt Dolore Voluptas Corporis Minima Rerum Aut, Obcaecati Illo. Impedit, Quisquam.",
-            educationQualification: "educationQualification"
-        },
-        {
-            title: "Web Development",
-            author: "Author",
-            duration: "Jan 2018 - Jan 2023",
-            description: "Tempore Hic Expedita Adipisci Vel Aliquam! Sapiente Veritatis Libero Eos Quibusdam Natus Nemo Incidunt Dolore Voluptas Corporis Minima Rerum Aut, Obcaecati Illo. Impedit, Quisquam.",
-            educationQualification: "educationQualification"
-        },
-        {
-            title: "Web Development",
-            author: "Author",
-            duration: "Jan 2018 - Jan 2023",
-            description: "Tempore Hic Expedita Adipisci Vel Aliquam! Sapiente Veritatis Libero Eos Quibusdam Natus Nemo Incidunt Dolore Voluptas Corporis Minima Rerum Aut, Obcaecati Illo. Impedit, Quisquam.",
-            educationQualification: "educationQualification"
-        },
-        {
-            title: "Web Development",
-            author: "Author",
-            duration: "Jan 2018 - Jan 2023",
-            description: "Tempore Hic Expedita Adipisci Vel Aliquam! Sapiente Veritatis Libero Eos Quibusdam Natus Nemo Incidunt Dolore Voluptas Corporis Minima Rerum Aut, Obcaecati Illo. Impedit, Quisquam.",
-            educationQualification: "educationQualification"
-        },
-        {
-            title: "Web Development",
-            author: "Author",
-            duration: "Jan 2018 - Jan 2023",
-            description: "Tempore Hic Expedita Adipisci Vel Aliquam! Sapiente Veritatis Libero Eos Quibusdam Natus Nemo Incidunt Dolore Voluptas Corporis Minima Rerum Aut, Obcaecati Illo. Impedit, Quisquam.",
-            educationQualification: "educationQualification"
-        }
-    ];
-
     return (<>
         <div className=" w-full mt-5 capitalize">
             <div className="text-xl text-textPrimary capitalize mb-5">Education</div>
@@ -45,7 +7,7 @@ export default function Education() {
                 <div className="text-card w-2 h-full bg-card rounded-xl absolute -right-10"></div>
 
                 {educations.map((education, idx) => (
-                    <div className=" text-textPrimary  lg:w-[30vw]  flex flex-col gap-4 p-8 text-sm bg-white/10">
+                    <div key={idx} className=" text-textPrimary  lg:w-[30vw]  flex flex-col gap-4 p-8 text-sm bg-white/10">
                         <div className="flex justify-between relative  items-center">
                             <div className="flex flex-col md:flex-row gap-4 justify-between w-full">
                                 <div>
@@ -64,8 +26,6 @@ export default function Education() {
 
                     </div>
                 ))}
-
-
             </div>
         </div>
     </>)

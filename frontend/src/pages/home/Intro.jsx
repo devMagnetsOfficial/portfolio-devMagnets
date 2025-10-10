@@ -1,11 +1,7 @@
-import { ReactTyped } from "react-typed"
+import { ReactTyped } from "react-typed";
+import stats from "./introData";
 export default function Intro() {
-    const stats = [
-        { value: "10+", label: "years experience" },
-        { value: "143", label: "completed projects" },
-        { value: "114", label: "happy customers" },
-        { value: "20+", label: "honors and awards" }
-    ];
+
 
     return (<>
         <div className=" bg-dark  ">
