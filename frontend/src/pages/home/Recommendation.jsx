@@ -75,10 +75,10 @@ useEffect(()=>{
             </div>
 
             {/* slider with button  */}
-            <div className=" text-textPrimary flex justify-between mb-5">
+            <div className=" text-textPrimary flex justify-between items-center mb-5">
                 <div className="flex gap-2">
                     {Recommendations.map((element, idx) => (
-                        <span key={idx} onClick={()=>customSlide(idx)} className={`cursor-pointer transition-all duration-300 ease-in-out  w-5 rounded-xl h-1  font-bold ${isvisible(idx) ? 'bg-accent' : 'bg-gray-300'}`}>
+                        <span key={idx} onClick={()=>customSlide(idx)} className={`cursor-pointer transition-all duration-300 ease-in-out  w-2 md:w-5 rounded-xl h-1  font-bold ${isvisible(idx) ? 'bg-accent' : 'bg-gray-300'}`}>
                         </span>
                     ))}
                 </div>

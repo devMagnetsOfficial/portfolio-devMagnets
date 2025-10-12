@@ -28,12 +28,13 @@ export default function LeftMenu() {
   }
   return (<>
 
-    <div className={`capitalize ${isMenuClicked ? ' w-[min(70%,300px)] lg:w-[300px] h-[100vh] ' : 'w-10 h-[0px] '} transition-[width] duration-1000 ease-in-out z-10 text-white text-sm bg-dark flex-col flex justify-between   absolute lg:relative `}>
-      <PiDotsThreeVerticalBold onClick={setMenu} className="lg:hidden text-xl absolute h-[70px] right-2 " />
+    <div className={`capitalize ${isMenuClicked ? ' w-[min(70%,300px)] lg:w-[300px] h-[100vh] ' : 'w-10 h-[0px] '} 
+    transition-[width] duration-1000 ease-in-out z-30 text-white text-sm  flex-col flex justify-between bg-darkGray  absolute lg:relative `}>
+      <PiDotsThreeVerticalBold onClick={setMenu} className={`lg:hidden text-xl absolute h-[70px] right-2 text-textSecondary `} />
 
       {isMenuClicked && <>
         {/* brief bio */}
-        <div className="bg-dark flex items-center justify-center h-[35%] ">
+        <div className=" flex items-center justify-center h-[35%] ">
           <div className="flex flex-col items-center gap-2">
             <img className="w-[100px] rounded-[100%]" src="https://pics.craiyon.com/2023-12-13/y2y9z8iKQp-lMupp8bBypg.webp" alt="" />
             <h1 className="text-lg font-semibold">abhishek singh</h1>
@@ -171,7 +172,7 @@ export default function LeftMenu() {
         </div>
 
         {/* social media link */}
-        <div className="bg-dark h-[5%] flex items-center">
+        <div className=" h-[5%] flex items-center">
           <ul className="flex justify-center gap-5  w-full  ">
             <li><a href=""><FaGithub /></a></li>
             <li><a href=""><FaSquareXTwitter /></a></li>

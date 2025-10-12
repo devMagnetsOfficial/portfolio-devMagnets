@@ -15,22 +15,22 @@ export default function RightMenu() {
 
     return (<>
 
-        <div className={`bg-darkGray   ${isMenubarClicked ? 'w-[250px] h-[100vh]' : 'w-[50px] h-[0px] '} transition-[width] duration-1000 ease-in-out absolute z-[3]   right-0`}>
-            <div  className={`bg-dark flex ${isMenubarClicked ? 'pl-4' : 'justify-center'} h-[70px] items-center`}>
+        <div className={` ${isMenubarClicked ? 'w-[250px]' : 'w-[50px] h-fit'}  absolute h-full md:static transition-[width]  duration-1000 ease-in-out  z-[30]   right-0`}>
+            <div  className={`bg-darkGray md:bg-dark  flex ${isMenubarClicked ? 'pl-4' : 'justify-center'} h-[70px] items-center`}>
                 {isMenubarClicked ?
-                    <MdClose className="lg:text-2xl text-textSecondary" onClick={setMenubar} />
+                    <MdClose className="lg:text-2xl text-textSecondary " onClick={setMenubar} />
                     :
-                    <MdMenu className="lg:text-2xl text-textSecondary" onClick={setMenubar} />
+                    <MdMenu className="lg:text-2xl  text-textSecondary " onClick={setMenubar} />
                 }
 
             </div>
 
-            <div className="flex justify-center   items-center  text-textSecondary uppercase  min-h-[100px]">
-               {!isMenubarClicked&& <div className={` rotate-90 lg:block  hidden`}>{page}</div>}
+            <div className="flex justify-center  items-center  text-textSecondary uppercase ">
+               {!isMenubarClicked&& <div className={`mt-20 rotate-90 lg:block absolute  hidden`}>{page}</div>}
 
                 {isMenubarClicked &&
                     <>
-                        <div onClick={setMenubar} className="flex flex-col w-full">
+                        <div onClick={setMenubar} className="flex  h-[90vh] flex-col w-full bg-dark md:bg-darkGray ">
                             <div className="mt-[100px]  w-full p-5 text-sm ">
                                 <ul className="flex flex-col gap-2 ">
                                     <NavLink to='/' className={({ isActive }) => (isActive ? 'text-white font-semibold' : '')}>Home</NavLink>

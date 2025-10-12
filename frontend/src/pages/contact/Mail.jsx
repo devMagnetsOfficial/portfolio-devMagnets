@@ -33,7 +33,7 @@ export default function Mail() {
     }
     return (<>
         <div className=" text-textPrimary capitalize ">
-            <h1 className="text-xl mb-5">contact information</h1>
+            <h1 className="text-xl mb-5">get in touch</h1>
 
             <form onSubmit={handleSubmit} className="mb-5 bg-card p-5  gap-10 min-h-[49vh] flex flex-col">
                 <label htmlFor="name" className="flex items-center">
