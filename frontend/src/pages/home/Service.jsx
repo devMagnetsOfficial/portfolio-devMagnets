@@ -8,7 +8,7 @@ export default function Service() {
 
                 {
                     services.map((e, idx) => (
-                        <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10">
+                        <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10 hover-effect">
                             <h1 className="text-textPrimary">{e.title}</h1>
                             <p className="text-textSecondary">{e.description}</p>
                             <button type="button" className="w-fit text-accent uppercase">order now &gt;</button>

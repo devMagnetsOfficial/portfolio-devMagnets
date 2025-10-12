@@ -7,7 +7,7 @@ export default function Pricing() {
             <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5 ">
 
 
-                <div className=" text-textPrimary flex flex-col items-center gap-8 p-8 text-sm bg-white/10">
+                <div className=" text-textPrimary flex flex-col items-center gap-8 p-8 text-sm bg-white/10 hover-effect">
                     <h1 className="">Starter Price</h1>
                     <h2 className="text-2xl">$ <span className="text-accent font-semibold">free</span> hour <span className="text-accent font-semibold">*</span></h2>
                     <ul className="flex flex-col items-center gap-4">
@@ -24,7 +24,7 @@ export default function Pricing() {
                 </div>
 
 
-                <div className=" text-textPrimary flex relative  flex-col items-center gap-8 p-8 text-sm bg-white/10 overflow-hidden">
+                <div className=" text-textPrimary flex relative  flex-col items-center gap-8 p-8 text-sm bg-white/10 overflow-hidden hover-effect">
                 <span className="bg-accent rotate-45 w-[160px] text-center text-dark uppercase font-semibold absolute -right-10">popular</span>
                     <h1 className="">Hour Payment</h1>
                     <h2 className="text-2xl">$ <span className="text-accent font-semibold">29</span> hour <span className="text-accent font-semibold">*</span></h2>
@@ -41,7 +41,7 @@ export default function Pricing() {
                 </div>
 
 
-                <div className=" text-textPrimary flex flex-col items-center gap-8 p-8 text-sm bg-white/10">
+                <div className=" text-textPrimary flex flex-col items-center gap-8 p-8 text-sm bg-white/10 hover-effect">
                     <h1 className="">Full Time</h1>
                     <h2 className="text-2xl">$ <span className="text-accent font-semibold">2999</span> hour <span className="text-accent font-semibold">*</span></h2>
                     <ul className="flex flex-col items-center gap-4">
