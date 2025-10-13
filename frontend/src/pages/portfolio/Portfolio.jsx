@@ -6,7 +6,7 @@ export default function Portfolio() {
     return (<>
         <div className=" capitalize text-textPrimary  ">
             {/* contact information */}
-            <h1 className="text-xl mb-5">portfolio</h1>
+            <h1 className="text-2xl mb-5">portfolio</h1>
             {/* filter */}
             <ul className="grid grid-cols-2 text-xs gap-2 lg:grid-cols-5  lg:text-sm  mb-5">
                 <li>All categories</li>

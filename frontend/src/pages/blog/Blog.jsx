@@ -4,7 +4,12 @@ export default function Blog() {
 
     return (<>
         <div className=" w-full mt-5 capitalize">
-            <div className="text-xl text-textPrimary capitalize mb-5">Blogs</div>
+
+            <div className="capitalize text-textPrimary text-center ">
+                <h1 className="text-2xl">explore our blog</h1>
+                <span className="text-xs">read articles, tips, and insights to stay updated and grow your knowledge</span>
+            </div>
+
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5 ">
                 {posts.map((post, idx) => (
                     <div key={idx} className=" text-textPrimary flex flex-col gap-4 p-8 text-sm bg-white/10">
@@ -12,7 +17,7 @@ export default function Blog() {
                         <div className="bg-dark w-fit px-5 py-1 rounded-2xl">
                             <span>{post.date}</span>
                             <br />
-                            <span className="text-xs text-textSecondary" >{ post.categories}</span>
+                            <span className="text-xs text-textSecondary" >{post.categories}</span>
                         </div>
                         <h1 className="">{post.title}</h1>
                         <p className="text-textSecondary">{post.description}</p>

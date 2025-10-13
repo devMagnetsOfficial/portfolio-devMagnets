@@ -1,7 +1,12 @@
 export default function Information() {
     return (<>
         <div className=" text-textPrimary  ">
-            <h1 className="text-xl mb-5">Contact Information</h1>
+            <div className="capitalize text-textPrimary text-center py-4">
+                <h1 className="text-2xl">get in touch with us</h1>
+                <span className="text-xs">fill out the form below and we'll get back to you soon</span>
+            </div>
+
+  
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-5 text-sm">
 
                 <div className=" flex flex-col gap-2 bg-card p-5">
@@ -19,7 +24,7 @@ export default function Information() {
                     </div>
                 </div>
 
-                   <div className=" flex flex-col gap-2 bg-card p-5">
+                <div className=" flex flex-col gap-2 bg-card p-5">
                     <div className="flex justify-between">
                         <span className="font-semibold">Email</span>
                         <span className="text-[#cacace]">devmagnets.mail@gmail.com</span>
@@ -34,7 +39,7 @@ export default function Information() {
                     </div>
                 </div>
 
-                   <div className=" flex flex-col gap-2 bg-card p-5">
+                <div className=" flex flex-col gap-2 bg-card p-5">
                     <div className="flex justify-between">
                         <span className="font-semibold">Support service:</span>
                         <span className="text-[#cacace]">8368881079</span>
@@ -49,7 +54,7 @@ export default function Information() {
                     </div>
                 </div>
 
-                   
+
 
             </div>
 

@@ -42,7 +42,7 @@ export default function Mentorship() {
         }
     }
     return (<>
-        <div className="capitalize text-textPrimary text-center bg-darkGray py-4">
+        <div className="capitalize text-textPrimary text-center  py-4">
             <h1 className="text-2xl ">join our mentorship program</h1>
             <span className="text-xs">learn from experienced mentors and accleate your career growth</span>
         </div>

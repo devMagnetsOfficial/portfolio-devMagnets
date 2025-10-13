@@ -38,14 +38,15 @@ export default function Donate() {
     }
     return (<>
         <div className=" text-textPrimary capitalize ">
-            <div className="mb-5 flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-xl">
+            <div className="mb-5 flex flex-col gap-2 ">
+                <div className="flex items-center gap-2 text-xl justify-center">
                     <PiHandHeartFill className="text-3xl" />
-                    <h1> support our cause</h1>
+                    <h1 className="text-2xl"> support our cause</h1>
                 </div>
                 <p className="text-xs text-gray-200">Your donation helps us continue our work and reach more people. Thank you for your support!</p>
 
             </div>
+            
             <form onSubmit={handleSubmit} className="mb-5 bg-card p-5  gap-10 min-h-[49vh] flex flex-col">
                 <label htmlFor="name" className="flex items-center">
                     <div className="w-10 h-10 bg-dark  flex items-center justify-center"><FaUser className="text-lg " /></div>
