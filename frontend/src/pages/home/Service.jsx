@@ -5,7 +5,6 @@ export default function Service() {
         <div className=" w-full mt-5 capitalize">
             <div className="text-xl text-textPrimary capitalize mb-5">my serivces</div>
             <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5 ">
-
                 {
                     services.map((e, idx) => (
                         <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10 hover-effect">
@@ -15,10 +14,6 @@ export default function Service() {
                         </div>
                     ))
                 }
-
-
-
-
             </div>
         </div>
     </>)

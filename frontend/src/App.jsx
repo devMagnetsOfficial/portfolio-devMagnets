@@ -6,6 +6,7 @@ import Portfolio from "./pages/portfolio/Portfolio"
 import Blog from "./pages/blog/Blog"
 import History from "./pages/history/History"
 import Donation from "./pages/donation/Donate"
+import MentorShip from "./pages/mentorship/Mentorship"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 export default function App() {
   return (<>
@@ -19,7 +20,7 @@ export default function App() {
           <Route path='/blog' element={<Blog />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/donate' element={<Donation />} />
-          <Route path='/mentorship' element={<RightMenu />} />
+          <Route path='/mentorship' element={<MentorShip />} />
           <Route path='*' element={<><div>page is under construction</div></>} />
         </Route>
       </Routes>

@@ -7,18 +7,8 @@ import { TbCoinRupeeFilled } from "react-icons/tb";
 import { PiHandHeartFill } from "react-icons/pi";
 import { RiSubtractFill } from "react-icons/ri";
 export default function Donate() {
-    const [Form, SetForm] = useState({ name: '', mail: '', message: '' })
-    const [amount, setAmount] = useState(100)
-    const incAmount = () => {
-        setAmount(amount + 100);
-    }
-    const decAmount = () => {
+    const [Form, SetForm] = useState({ name: '', mail: '', message: '', amount: 100 })
 
-        setAmount((prev) => {
-            if (prev <= 100) return 100
-            return prev - 100;
-        });
-    }
     const onChange = (e) => {
         const { name, value } = e.target
         SetForm((prev) => ({ ...prev, [name]: value }))
@@ -32,7 +22,7 @@ export default function Donate() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({Form,amount})
+                body: JSON.stringify(Form)
             })
             const response = await res.json()
             if (response.success) {
@@ -65,6 +55,12 @@ export default function Donate() {
                     <div className="w-10 h-10 bg-dark flex items-center justify-center"><MdEmail className="text-lg" /></div>
                     <input className="bg-darkGray w-full h-10 pl-4" type="text" onChange={onChange} name="mail" id="mail" placeholder="Mail" />
                 </label>
+                <label htmlFor="amount" className="flex items-center">
+                    <div className="w-10 h-10 bg-dark flex items-center justify-center"><TbCoinRupeeFilled className="text-lg" /></div>
+                    <input className="bg-darkGray w-full h-10 pl-4" type="number" onChange={onChange} name="amount" id="amount" placeholder='100' />
+                </label>
+
+
 
 
 
@@ -72,12 +68,17 @@ export default function Donate() {
                     <div className="w-10  bg-dark   flex pt-4 justify-center"><FaMessage className="text-lg" /></div>
                     <textarea className="min-h-[200px] pl-4 pt-2 bg-darkGray w-full h-10" onChange={onChange} name="message" id="message" placeholder="Message"></textarea>
                 </label>
-                <div className="flex justify-around gap-2 bg-dark min-w-[200px] w-fit px-4 py-2 rounded-2xl mx-auto">
-                    <IoIosAdd className="text-3xl" onClick={incAmount} />
-                    <div className="flex items-center gap-2 bg-green-500/20 px-2 py-1 rounded-xl"><TbCoinRupeeFilled className="text-2xl" /> {amount}</div>
-                    <RiSubtractFill className="text-3xl" onClick={decAmount} />
-                </div>
-                <button type={'submit'} className=" bg-accent w-fit px-10 py-2 capitalize text-dark font-semibold ">Donate now</button>
+
+                <span className="flex items-center gap-2 italic text-xs">
+                    You're about to Donate
+                    <div className="flex items-center gap-2 bg-green-500/80 px-2 py-1 rounded-xl italic w-fit"><TbCoinRupeeFilled className="text-xl" />{Form.amount} </div>
+                    INR to devMagnets!
+                </span>
+
+                {/* submit button */}
+                <button type={'submit'} className=" bg-accent w-fit px-10 py-2 capitalize text-dark font-semibold flex gap-2 items-center ">
+                    <span>Donate Now</span>
+                </button>
 
             </form>
 
