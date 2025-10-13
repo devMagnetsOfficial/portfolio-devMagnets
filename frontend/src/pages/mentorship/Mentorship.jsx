@@ -42,6 +42,10 @@ export default function Mentorship() {
         }
     }
     return (<>
+        <div className="capitalize text-textPrimary text-center bg-darkGray py-4">
+            <h1 className="text-2xl ">join our mentorship program</h1>
+            <span className="text-xs">learn from experienced mentors and accleate your career growth</span>
+        </div>
         {/* meet our mentor */}
         {/* how it works section */}
         <div className=" w-full my-5 capitalize">
@@ -65,7 +69,7 @@ export default function Mentorship() {
                 {
                     steps.map((e, idx) => (
                         <div key={idx} className=" flex flex-col gap-4 px-8 py-4 text-sm  bg-white/10 hover-effect">
-                            <h1 className="text-textPrimary text-xl">step {e.step}</h1>
+                            <h1 className="text-textPrimary text-lg md:text-xl">step {e.step}</h1>
                             <p className="text-textSecondary">{e.desc}</p>
                         </div>
                     ))
