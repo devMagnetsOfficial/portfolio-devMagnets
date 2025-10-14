@@ -96,7 +96,7 @@ export default function Recommendation() {
                                         <h2 className="text-textSecondary">{items.designation}</h2>
                                     </div>
                                     <div className="w-[50px] lg:w-[70px] bg-dark  overflow-hidden aspect-[1/1] rounded-[100%] absolute right-5 lg:right-10 -top-4 ">
-                                        <img className="w-full h-full " src="https://pics.craiyon.com/2023-12-13/y2y9z8iKQp-lMupp8bBypg.webp" alt="" />
+                                        <img className="w-full h-full object-cover " src={items.img} alt="" />
                                     </div>
                                 </div>
                                 <p className="text-textSecondary">{items.desc}</p>

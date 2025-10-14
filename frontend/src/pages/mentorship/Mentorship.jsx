@@ -2,6 +2,7 @@ import { FaUser } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { useState } from "react";
+import { MdPhoneInTalk } from "react-icons/md";
 export default function Mentorship() {
     const steps = [
         { step: 1, desc: 'sign up and tail us your learning goals.' },
@@ -13,7 +14,7 @@ export default function Mentorship() {
         { name: 'rahul kumar', designation: 'ui/ux design', img: 'https://tse4.mm.bing.net/th/id/OIP.7ak06e3GyqJthLFeoMkWCQHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3' },
         { name: 'aansh singh', designation: 'data science', img: 'https://yt3.googleusercontent.com/ytc/AIdro_kXOPTxg8lLuMgEwEpN0WdyjLt17VkEMq_c7-EpVx45qNM=s900-c-k-c0x00ffffff-no-rj' }
     ]
-    const [Form, SetForm] = useState({ name: '', mail: '', message: '' })
+    const [Form, SetForm] = useState({ name: '', mail: '', message: '', phoneNo: '' })
     const onChange = (e) => {
         const { name, value } = e.target
         SetForm((prev) => ({ ...prev, [name]: value }))
@@ -42,7 +43,7 @@ export default function Mentorship() {
         }
     }
     return (<>
-        <div className="capitalize text-textPrimary text-center  py-4">
+        <div className="capitalize text-textPrimary text-center  ">
             <h1 className="text-2xl ">join our mentorship program</h1>
             <span className="text-xs">learn from experienced mentors and accleate your career growth</span>
         </div>
@@ -88,6 +89,10 @@ export default function Mentorship() {
                 <label htmlFor="mail" className="flex items-center">
                     <div className="w-10 h-10 bg-dark flex items-center justify-center"><MdEmail className="text-lg" /></div>
                     <input className="bg-darkGray w-full h-10 pl-4" type="text" onChange={onChange} name="mail" id="mail" placeholder="Mail" />
+                </label>
+                <label htmlFor="phoneNo" className="flex items-center">
+                    <div className="w-10 h-10 bg-dark flex items-center justify-center"><MdPhoneInTalk className="text-lg" /></div>
+                    <input className="bg-darkGray w-full h-10 pl-4" type='tel' onChange={onChange} name="phoneNo" id="phoneNo" placeholder="Phone Number" />
                 </label>
                 <label htmlFor="message" className="flex re">
                     <div className="w-10  bg-dark   flex pt-4 justify-center"><FaMessage className="text-lg" /></div>

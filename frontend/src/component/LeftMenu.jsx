@@ -36,7 +36,7 @@ export default function LeftMenu() {
         {/* brief bio */}
         <div className=" flex items-center justify-center h-[35%] ">
           <div className="flex flex-col items-center gap-2">
-            <img className="w-[100px] rounded-[100%]" src="https://pics.craiyon.com/2023-12-13/y2y9z8iKQp-lMupp8bBypg.webp" alt="" />
+            <img className="w-[100px] h-[100px] rounded-[100%] object-cover object-top " src="https://st.depositphotos.com/1011643/4430/i/950/depositphotos_44309759-stock-photo-young-indian-man-outdoors.jpg" alt="" />
             <h1 className="text-lg font-semibold">abhishek singh</h1>
             <div className="text-[#cacace] ">
               <p>mern developer</p>

@@ -26,7 +26,7 @@ export default function RightMenu() {
             </div>
 
             <div className="flex justify-center  items-center  text-textSecondary uppercase ">
-               {!isMenubarClicked&& <div className={`mt-20 rotate-90 lg:block absolute  hidden`}>{page}</div>}
+               {!isMenubarClicked&& <div className={`mt-[130px] rotate-90 lg:block absolute  hidden`}>{page}</div>}
 
                 {isMenubarClicked &&
                     <>

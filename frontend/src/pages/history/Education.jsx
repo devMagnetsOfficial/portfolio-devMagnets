@@ -2,10 +2,7 @@ import educations from "./educationData"
 export default function Education() {
     return (<>
         <div className=" w-full mt-5 capitalize">
-            <div className="capitalize text-textPrimary text-center ">
-                <h1 className="text-2xl">my journey</h1>
-                <span className="text-xs">a timeline of my education and professional experience</span>
-            </div>
+      
 
             <div className="text-xl text-textPrimary capitalize mb-5">Education</div>
             <div className="flex  flex-col gap-5 w-fit lg:w-fit mb-10 relative ">

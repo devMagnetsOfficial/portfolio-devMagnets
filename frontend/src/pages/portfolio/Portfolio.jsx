@@ -4,9 +4,12 @@ export default function Portfolio() {
     const [isProjectHover, setProjectHover] = useState(null)
 
     return (<>
-        <div className=" capitalize text-textPrimary  ">
-            {/* contact information */}
-            <h1 className="text-2xl mb-5">portfolio</h1>
+        <div className="capitalize text-textPrimary text-center">
+            <h1 className="text-2xl">explore our portfolio</h1>
+            <span className="text-xs">discover our projects, creativity, and the work that defines our journey</span>
+        </div>
+
+        <div className=" capitalize text-textPrimary mt-5 ">
             {/* filter */}
             <ul className="grid grid-cols-2 text-xs gap-2 lg:grid-cols-5  lg:text-sm  mb-5">
                 <li>All categories</li>
@@ -25,7 +28,7 @@ export default function Portfolio() {
                                 <div className=" font-semibold min-h-[50px]  p-5 absolute bottom-0 bg-dark/70 w-full ">
                                     <h1>{project.title}</h1>
                                     <div className="text-xs text-gray-400 " >{project.description}</div>
-                                    
+
                                     <a href={project.link} className="text-sm text-accent cursor-pointer hover:border-b-2 pb-1 w-fit border-accent ">link &gt;</a>
                                 </div>
                             }
