@@ -1,7 +1,7 @@
-const portfolioModel=require('./portfolio.js')
+const portfolioModels=require('./model.js')
 const add=async(req, res) => {
     try {
-       await portfolioModel.create({
+       await portfolioModels.create({
             title: 'String',
             description: 'String',
             category: 'String',
@@ -16,7 +16,7 @@ const add=async(req, res) => {
 }
 const fetch=async(req,res)=>{
     try{
-        const projects=await portfolioModel.find()
+        const projects=await portfolioModels.find()
         res.json({success:true,projects})
     }
     catch(err){
@@ -24,9 +24,9 @@ const fetch=async(req,res)=>{
     }
 }
 const remove=async(req,res)=>{
-    const id=req.body.id
+    const id=req.params.id
     try{
-        await portfolioModel.deleteOne({id})
+        await portfolioModels.deleteOne({_id:id})
         res.json({success:true})
 
     }catch(err){

@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useEffect } from 'react'
 export default function Portfolio() {
     const [isProjectHover, setProjectHover] = useState()
-    const [deleteProjects, setProjectForDelete] = useState()
+
     const [projects, setProjects] = useState([])
     // fetch project from backend
     const backend = 'http://localhost:2030'
@@ -27,8 +27,31 @@ export default function Portfolio() {
     useEffect(() => {
         fetchProjects()
     }, [])
+    // admin functionality
+    const [isAdmin, setAdmin] = useState(true)
     // remove projects from backend
-    
+    const deleteProject = async (id) => {
+        const confirm = window.confirm('are you sure you want to delete this project')
+        if (!confirm) return
+        try {
+            const req = await fetch(`${backend}/portfolio/remove/${id}`, {
+                method: 'DELETE'
+            })
+            const res = await req.json()
+            if (res.success) {
+                alert('project is deleted')
+                fetchProjects()
+            }
+            else {
+                alert('error in backend while deleting the project from database')
+            }
+        } catch (err) {
+            console.log('err while deleting project' + err)
+        }
+    }
+    // update projecs in db
+    // add project in db
+
 
     return (<>
         <div className="capitalize text-textPrimary text-center">
@@ -57,7 +80,10 @@ export default function Portfolio() {
                                     <h1>{project.title}</h1>
                                     <div className="text-xs text-gray-400 " >{project.description}</div>
                                     <a href={project.link} className="text-sm text-accent cursor-pointer hover:border-b-2 pb-1 w-fit border-accent ">link &gt;</a>
-                                    <div className="mx-auto text-xs text-red-600 bg-red-400 w-fit px-4 py-2 rounded-3xl hover:bg-red-600 hover:text-red-400">delete</div>
+                                    <div className="flex">
+                                        <div className="mx-auto text-xs text-red-600 bg-red-400 w-fit px-4 py-2 rounded-3xl hover:bg-red-600 hover:text-red-400" onClick={() => deleteProject(project._id)}>delete</div>
+                                        <div className="mx-auto text-xs text-green-600 bg-green-400 w-fit px-4 py-2 rounded-3xl hover:bg-green-600 hover:text-green-400" onClick={() => deleteProject(project._id)}>add</div>
+                                    </div>
                                 </div>
                             }
                         </div>
