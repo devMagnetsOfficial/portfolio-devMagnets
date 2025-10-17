@@ -1,6 +1,9 @@
 import { useState } from "react"
-// import projects from "./projects";
+
+
+
 import { useEffect } from 'react'
+import AddProject from "./AddProject";
 export default function Portfolio() {
     const [isProjectHover, setProjectHover] = useState()
 
@@ -49,8 +52,46 @@ export default function Portfolio() {
             console.log('err while deleting project' + err)
         }
     }
-    // update projecs in db
+    const [selectProject, setSelectProject] = useState(false)
+    const [Project, setProjectDetail] = useState({
+        title: "",
+        description: "",
+        category: "",
+        link: "",
+        img: ""
+    })
+
+    const onChange = (e) => {
+        const { name, value } = e.target
+        setProjectDetail((prev) => ({ ...prev, [name]: value }))
+        console.log(Project)
+    }
+
     // add project in db
+    const addProjectsOnSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const req = await fetch(`${backend}/portfolio/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(Project)
+            })
+            const res = await req.json()
+            if (res.success) {
+                alert('project added')
+            }
+            else {
+                console.log('fail to add project due to backend issue'+res.err)
+            }
+
+        } catch (err) {
+            console.log('err while adding addproject' + err)
+        }
+    }
+    // update projecs in db
+
 
 
     return (<>
@@ -58,6 +99,11 @@ export default function Portfolio() {
             <h1 className="text-2xl">explore our portfolio</h1>
             <span className="text-xs">discover our projects, creativity, and the work that defines our journey</span>
         </div>
+
+        {
+            selectProject &&
+            <AddProject onChange={onChange} addProjectsOnSubmit={addProjectsOnSubmit} Project={Project} setSelectProject={setSelectProject} />
+        }
 
         <div className=" capitalize text-textPrimary mt-5 ">
             {/* filter */}
@@ -68,7 +114,12 @@ export default function Portfolio() {
                 <li>logos</li>
                 <li>drawing</li>
             </ul>
+            <div className="mx-auto text-xs text-green-60 flex justify-end items-end  w-full m-5" onClick={addProjectsOnSubmit}>
+                <div className="bg-green-400  px-8 py-2 rounded-3xl hover:bg-green-600 hover:text-green-400 g" onClick={() => setSelectProject(true)}>add</div>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
                 {
                     projects.map((project, idx) => (
                         <div key={idx} onMouseEnter={() => setProjectHover(idx)} onMouseLeave={() => setProjectHover(null)} className="min-h-[250px]  relative overflow-hidden">
@@ -82,7 +133,6 @@ export default function Portfolio() {
                                     <a href={project.link} className="text-sm text-accent cursor-pointer hover:border-b-2 pb-1 w-fit border-accent ">link &gt;</a>
                                     <div className="flex">
                                         <div className="mx-auto text-xs text-red-600 bg-red-400 w-fit px-4 py-2 rounded-3xl hover:bg-red-600 hover:text-red-400" onClick={() => deleteProject(project._id)}>delete</div>
-                                        <div className="mx-auto text-xs text-green-600 bg-green-400 w-fit px-4 py-2 rounded-3xl hover:bg-green-600 hover:text-green-400" onClick={() => deleteProject(project._id)}>add</div>
                                     </div>
                                 </div>
                             }

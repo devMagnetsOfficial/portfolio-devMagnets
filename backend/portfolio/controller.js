@@ -1,17 +1,15 @@
 const portfolioModels=require('./model.js')
 const add=async(req, res) => {
+    const {title,description,category,link,img}=req.body
+    console.log(req.body)
     try {
        await portfolioModels.create({
-            title: 'String',
-            description: 'String',
-            category: 'String',
-            link: 'String',
-            img: 'String'
+           title,description,category,link,img
         })
-        res.send('added')
+        res.json({success:true})
     }
     catch (err) {
-        res.send('err (whiling adding your project to db): '+err)
+        res.json({err,success:false})
     }
 }
 const fetch=async(req,res)=>{
@@ -26,7 +24,7 @@ const fetch=async(req,res)=>{
 const remove=async(req,res)=>{
     const id=req.params.id
     try{
-        await portfolioModels.deleteOne({_id:id})
+        await portfolioModels.Find({_id:id})
         res.json({success:true})
 
     }catch(err){

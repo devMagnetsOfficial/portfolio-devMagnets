@@ -2,31 +2,31 @@ const mongoose=require('mongoose')
 // schema
 const portfolioSchema = new mongoose.Schema({
     title: {
-        type:'String',
-        unique:'true',
-        required:'true'
+        type:String,
+        unique:true,
+        required:true
     },
     description:{
-        type:'String',
-        unique:'true',
-        required:'true'
+        type:String,
+        unique:true,
+        required:true
     },
 
     category: {
-        type:'String',
-        required:'true'
+        type:String,
+        required:true
     },
  
     link: {
-        type:'String',
-        unique:'true',
-        required:'true'
+        type:String,
+        unique:true,
+        required:true
     },
 
     img: {
-        type:'String',
-        unique:'true',
-        required:'true'
+        type:String,
+        unique:true,
+        required:true
     },
      
 })
