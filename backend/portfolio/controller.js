@@ -1,35 +1,48 @@
-const portfolioModels=require('./model.js')
-const add=async(req, res) => {
-    const {title,description,category,link,img}=req.body
-    console.log(req.body)
+const portfolioModels = require('./model.js')
+const add = async (req, res) => {
+    const { title, description, category, link, img, id } = req.body
     try {
-       await portfolioModels.create({
-           title,description,category,link,img
+        await portfolioModels.create({
+            title, description, category, link, img
         })
-        res.json({success:true})
+        res.json({ success: true })
     }
     catch (err) {
-        res.json({err,success:false})
+        res.json({ err, success: false })
     }
 }
-const fetch=async(req,res)=>{
-    try{
-        const projects=await portfolioModels.find()
-        res.json({success:true,projects})
+const modify = async (req, res) => {
+    const { title, description, category, link, img, id } = req.body
+    try {
+        await portfolioModels.findOneAndUpdate({ _id:id }, {
+            $set: {
+                title, description, category, link, img
+            }
+        })
+        res.json({ success: true })
     }
-    catch(err){
-        res.json({err,success:false})
+    catch (err) {
+        res.json({ err, success: false })
     }
 }
-const remove=async(req,res)=>{
-    const id=req.params.id
-    try{
-        await portfolioModels.Find({_id:id})
-        res.json({success:true})
+const fetch = async (req, res) => {
+    try {
+        const projects = await portfolioModels.find()
+        res.json({ success: true, projects })
+    }
+    catch (err) {
+        res.json({ err, success: false })
+    }
+}
+const remove = async (req, res) => {
+    const id = req.params.id
+    try {
+        await portfolioModels.deleteOne({ _id: id })
+        res.json({ success: true })
 
-    }catch(err){
-        res.json({err,success:false})
+    } catch (err) {
+        res.json({ err, success: false })
     }
 
 }
-module.exports={add,fetch,remove}
+module.exports = { add, fetch, remove, modify }

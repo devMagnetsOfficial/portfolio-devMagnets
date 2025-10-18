@@ -3,12 +3,12 @@ const mongoose=require('mongoose')
 const portfolioSchema = new mongoose.Schema({
     title: {
         type:String,
-        unique:true,
+        // unique:true,
         required:true
     },
     description:{
         type:String,
-        unique:true,
+        // unique:true,
         required:true
     },
 
@@ -19,13 +19,13 @@ const portfolioSchema = new mongoose.Schema({
  
     link: {
         type:String,
-        unique:true,
+        // unique:true,
         required:true
     },
 
     img: {
         type:String,
-        unique:true,
+        // unique:true,
         required:true
     },
      

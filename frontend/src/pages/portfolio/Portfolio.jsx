@@ -66,24 +66,29 @@ export default function Portfolio() {
         setProjectDetail((prev) => ({ ...prev, [name]: value }))
         console.log(Project)
     }
+    const [modify,setModify]=useState()
 
     // add project in db
     const addProjectsOnSubmit = async (e) => {
         e.preventDefault()
+        const endPoint=selectProject=='new project'?'add':'modify'
+        const data=selectProject=='new project'?Project:{...Project,id:modify}
         try {
-            const req = await fetch(`${backend}/portfolio/add`, {
+            const req = await fetch(`${backend}/portfolio/${endPoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(Project)
+                body: JSON.stringify(data)
             })
             const res = await req.json()
             if (res.success) {
                 alert('project added')
+                fetchProjects()
+                setSelectProject(false)
             }
             else {
-                console.log('fail to add project due to backend issue'+res.err)
+                console.log('fail to add project due to backend issue' + JSON.stringify(res.err))
             }
 
         } catch (err) {
@@ -102,7 +107,7 @@ export default function Portfolio() {
 
         {
             selectProject &&
-            <AddProject onChange={onChange} addProjectsOnSubmit={addProjectsOnSubmit} Project={Project} setSelectProject={setSelectProject} />
+            <AddProject onChange={onChange} addProjectsOnSubmit={addProjectsOnSubmit} Project={Project} selectProject={selectProject} setSelectProject={setSelectProject} />
         }
 
         <div className=" capitalize text-textPrimary mt-5 ">
@@ -114,8 +119,8 @@ export default function Portfolio() {
                 <li>logos</li>
                 <li>drawing</li>
             </ul>
-            <div className="mx-auto text-xs text-green-60 flex justify-end items-end  w-full m-5" onClick={addProjectsOnSubmit}>
-                <div className="bg-green-400  px-8 py-2 rounded-3xl hover:bg-green-600 hover:text-green-400 g" onClick={() => setSelectProject(true)}>add</div>
+            <div className="mx-auto text-xs text-green-60 flex justify-end items-end  w-full m-5" >
+                <div className="bg-green-400  px-8 py-2 rounded-3xl hover:bg-green-600 hover:text-green-400 g" onClick={() => setSelectProject('new project')}>add</div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -133,6 +138,10 @@ export default function Portfolio() {
                                     <a href={project.link} className="text-sm text-accent cursor-pointer hover:border-b-2 pb-1 w-fit border-accent ">link &gt;</a>
                                     <div className="flex">
                                         <div className="mx-auto text-xs text-red-600 bg-red-400 w-fit px-4 py-2 rounded-3xl hover:bg-red-600 hover:text-red-400" onClick={() => deleteProject(project._id)}>delete</div>
+                                        <div className="mx-auto text-xs text-green-600 bg-green-400 w-fit px-4 py-2 rounded-3xl hover:bg-green-600 hover:text-green-400" onClick={() => {
+                                            setSelectProject('modify project')
+                                            setModify(project._id)
+                                        }}>modify</div>
                                     </div>
                                 </div>
                             }
