@@ -1,21 +1,25 @@
- const backend = 'http://localhost:2030'
-    const fetchProjects = async () => {
-        console.log('fetching projects ....')
+ const addService = async (e) => {
+        e.preventDefault()
         try {
-            const req = await fetch(`${backend}/portfolio/fetch`, {
-                method: 'GET'
+            const isAdd = true ? 'add' : 'modify'
+            const url = `${backend}/service/${isAdd}`
+            const method = 'POST'
+            const req = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ServiceData)
             })
             const res = await req.json()
             if (res.success) {
-                setProjects(res.projects)
-            }
-            else {
-                console.log('err in backend while fetching projects from databse')
+                alert('service is added')
+                setFormOpen(false)
+            } else {
+                console.log(res.err)
             }
         } catch (err) {
-            console.log('err (while fetching the projects list)' + err)
+            console.log(err)
         }
+
     }
-    useEffect(() => {
-        fetchProjects()
-    }, [])
