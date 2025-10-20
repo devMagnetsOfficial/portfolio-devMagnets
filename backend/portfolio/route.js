@@ -6,5 +6,5 @@ router.post('/add',add )
 router.get('/fetch',fetch)
 router.post('/fetchOne',fetchOne)
 router.delete(`/remove/:id`,remove)
-router.post('/modify',modify)
+router.patch('/modify',modify)
 module.exports=router;

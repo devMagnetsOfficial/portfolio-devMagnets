@@ -21,6 +21,9 @@ app.use(cors({
 const portfolio = require('./portfolio/route.js')
 app.use('/portfolio', portfolio)
 
+const service=require('./service/route.js')
+app.use('/service',service)
+
 //  index
 app.get('/', (req, res) => {
     res.send('hi buddy')

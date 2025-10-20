@@ -4,7 +4,7 @@ import AddProject from "./AddProject";
 export default function Portfolio() {
     const [isProjectHover, setProjectHover] = useState(null);
     const [projects, setProjects] = useState([]);
-    const backend = "http://localhost:2030";
+    const backend = import.meta.env.VITE_BACKEND
 
     // Fetch all projects
     const fetchProjects = async () => {
@@ -92,12 +92,13 @@ export default function Portfolio() {
     const addProjectsOnSubmit = async (e) => {
         e.preventDefault();
         const endPoint = selectProject === "new project" ? "add" : "modify";
+        const method=selectProject === "new project" ? "POST" : "PATCH";
         const data =
             selectProject === "new project" ? Project : { ...Project, id: modify };
 
         try {
             const req = await fetch(`${backend}/portfolio/${endPoint}`, {
-                method: "POST",
+                method: method,
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
@@ -211,7 +212,7 @@ export default function Portfolio() {
                                             delete
                                         </div>
                                         <div
-                                            className="mx-auto text-xs text-green-600 bg-green-400 w-fit px-4 py-2 rounded-3xl hover:bg-green-600 hover:text-green-400 cursor-pointer"
+                                            className="mx-auto text-xs text-orange-600 bg-orange-400 w-fit px-4 py-2 rounded-3xl hover:bg-orange-600 hover:text-orange-400 cursor-pointer"
                                             onClick={async () => {
                                                 setModify(project._id);
                                                 await modifiedfetchProjects(project._id);

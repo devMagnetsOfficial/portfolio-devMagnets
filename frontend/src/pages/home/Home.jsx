@@ -1,5 +1,5 @@
 import Intro from "./Intro"
-import Service from "./Service"
+import Service from "./service/Service"
 import Pricing from "./Pricing"
 import Recommendation from "./Recommendation"
 export default function Home() {
