@@ -73,11 +73,11 @@ export default function Service() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(id)
+                body: JSON.stringify({ id })
             })
             const res = await req.json()
             if (res.success) {
-                setFetchServices(res.service)
+                setServiceData(res.service[0])
             }
         } catch (err) {
             console.log(res.err)
@@ -105,6 +105,7 @@ export default function Service() {
                 }
                 else {
                     alert('service is update')
+                    setModify(false)
                 }
                 setFormOpen(false)
                 FetchService()
@@ -118,11 +119,17 @@ export default function Service() {
     }
 
     return (<>
-        {isFormOpen && <ServiceTemplate setFormOpen={setFormOpen} onChange={onChange} onSubmit={addService} data={FetchServices}/>}
+        {isFormOpen && <ServiceTemplate setFormOpen={setFormOpen} onChange={onChange} onSubmit={addService} data={ServiceData} />}
 
         <div className=" w-full mt-5 capitalize relative ">
 
-            <div className="bg-green-400 px-8 text-sm py-2 rounded-3xl hover:bg-green-600 hover:text-green-400 cursor-pointer text-dark  absolute  right-0" onClick={() => setFormOpen(true)}>add  </div>
+            <div className="bg-green-400 px-8 text-sm py-2 rounded-3xl hover:bg-green-600 hover:text-green-400 cursor-pointer text-dark  absolute  right-0"
+                onClick={() => {
+                    setFormOpen(true)
+                    setServiceData({ title: '', description: '' })
+                }
+                }
+            >add  </div>
 
             <div className="text-xl text-textPrimary capitalize mb-5 ">my serivces</div>
 
@@ -137,9 +144,9 @@ export default function Service() {
                                 <div className="bg-red-400 px-8 text-sm py-2 rounded-3xl hover:bg-red-600 hover:text-red-400 cursor-pointer text-dark" onClick={async () => {
                                     removeService(e._id)
                                 }}>delete </div>
-                                <div className="bg-orange-400 px-8 text-sm py-2 rounded-3xl hover:bg-orange-600 hover:text-orange-400 cursor-pointer text-dark" onClick={async() => {
+                                <div className="bg-orange-400 px-8 text-sm py-2 rounded-3xl hover:bg-orange-600 hover:text-orange-400 cursor-pointer text-dark" onClick={async () => {
                                     setModify(e._id)
-                                    await FetchServiceOne(e.id)
+                                    await FetchServiceOne(e._id)
                                     setFormOpen(true)
                                 }
                                 }>modify </div>
