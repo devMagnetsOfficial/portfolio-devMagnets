@@ -1,8 +1,8 @@
 const serviceModel = require("./serviceModel")
 const fetch = async (req, res) => {
     try {
-        const services = await serviceModel.find()
-        res.json({ success: true, services })
+        const Data = await serviceModel.find()
+        res.json({ success: true, Data })
     } catch (err) {
         res.json({ err })
     }
@@ -10,12 +10,9 @@ const fetch = async (req, res) => {
 }
 const fetchOne = async (req, res) => {
     const id = req.body.id
-    console.log(id)
     try {
-        const service = await serviceModel.find({ _id: id })
-        console.log(service)
-        res.json({ success: true, service })
-
+        const Data = await serviceModel.find({ _id: id })
+        res.json({ success: true, Data })
     } catch (err) {
         res.json({ err })
     }
