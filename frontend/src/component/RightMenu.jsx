@@ -1,11 +1,11 @@
 
-import { NavLink,useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useState } from "react"
 import { MdMenu, MdClose } from 'react-icons/md'
 export default function RightMenu() {
 
-    const pathname=useLocation().pathname
-    const page=pathname=='/'?'home':pathname.replace('/','')
+    const pathname = useLocation().pathname
+    const page = pathname == '/' ? 'home' : pathname.replace('/', '')
 
 
     const [isMenubarClicked, setMenubarClicked] = useState(false)
@@ -16,7 +16,7 @@ export default function RightMenu() {
     return (<>
 
         <div className={` ${isMenubarClicked ? 'w-[250px]' : 'w-[50px] h-fit'}  absolute h-full md:static transition-[width]  duration-1000 ease-in-out  z-[30]   right-0`}>
-            <div  className={`bg-darkGray md:bg-dark  flex ${isMenubarClicked ? 'pl-4' : 'justify-center'} h-[70px] items-center`}>
+            <div className={`bg-darkGray md:bg-dark  flex ${isMenubarClicked ? 'pl-4' : 'justify-center'} h-[70px] items-center`}>
                 {isMenubarClicked ?
                     <MdClose className="lg:text-2xl text-textSecondary " onClick={setMenubar} />
                     :
@@ -26,7 +26,7 @@ export default function RightMenu() {
             </div>
 
             <div className="flex justify-center  items-center  text-textSecondary uppercase ">
-               {!isMenubarClicked&& <div className={`mt-[130px] rotate-90 lg:block absolute  hidden`}>{page}</div>}
+                {!isMenubarClicked && <div className={`mt-[130px] rotate-90 lg:block absolute  hidden`}>{page}</div>}
 
                 {isMenubarClicked &&
                     <>
@@ -37,12 +37,12 @@ export default function RightMenu() {
                                     <NavLink to='/portfolio' className={({ isActive }) => (isActive ? 'text-[white]  font-semibold' : '')}>Portfolio</NavLink>
                                     <NavLink to='/history' className={({ isActive }) => (isActive ? 'text-white  font-semibold' : '')}>History</NavLink>
                                     <NavLink to='/blog' className={({ isActive }) => (isActive ? 'text-white  font-semibold' : '')}>Blog</NavLink>
-                                    <NavLink to='/contact' className={({ isActive }) => (isActive ? 'text-white  font-semibold' : '')}>Contact</NavLink>
                                 </ul>
                             </div>
                             <hr className="bg-textSecondary w-full h-[1px] my-5" />
                             <div className=" w-full p-5 text-sm ">
                                 <ul className="flex flex-col gap-2 ">
+                                    <NavLink to='/contact' className={({ isActive }) => (isActive ? 'text-white  font-semibold' : '')}>Contact</NavLink>
                                     <NavLink to='/donate' className={({ isActive }) => (isActive ? 'text-white font-semibold' : '')}>donate</NavLink>
                                     <NavLink to='/mentorship' className={({ isActive }) => (isActive ? 'text-[white]  font-semibold' : '')}>MentorShip</NavLink>
                                 </ul>

@@ -1,10 +1,69 @@
 import { FaStar } from "react-icons/fa6";
 import { FaLessThan, FaGreaterThan } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import ServiceTemplate from "../../utilities/ServiceTemplate";
+import { MdTitle, MdDescription } from "react-icons/md"
+import { FetchService, removeService, FetchServiceOne, addService } from "../../utilities/fetchCall"
 import Recommendations from "./recommendData";
-
+import Btn from "../../utilities/Btn";
 
 export default function Recommendation() {
+    const backend = import.meta.env.VITE_BACKEND
+    // to open or close the form
+    const [isFormOpen, setFormOpen] = useState(false)
+    // for add data from input tag
+    const [ServiceData, setServiceData] = useState({ name: '', description: '', designation: '', img: '', rate: '' })
+    const field = [
+        { name: 'name', type: 'text', Icon: MdTitle },
+        { name: 'description', type: 'text', Icon: MdDescription },
+        { name: 'designation', type: 'text', Icon: MdTitle },
+        { name: 'img', type: 'text', Icon: MdDescription },
+        { name: 'rate', type: 'text', Icon: MdTitle },
+
+    ]
+    // for display added data
+    const [FetchServices, setFetchServices] = useState([])
+    // for modifying 
+    const [isModify, setModify] = useState()
+    // handle input change
+    const onChange = (e) => {
+        const { name, value } = e.target
+        setServiceData((prev) => ({ ...prev, [name]: value }))
+        console.log(ServiceData)
+    }
+    // fetch all card 
+    const fetchAllServiceCard = async () => {
+        FetchService(`${backend}/recommendation/fetch`, setFetchServices)
+    }
+    useEffect(() => {
+        fetchAllServiceCard()
+        console.log(FetchServices)
+    }, [])
+
+
+    const add = () => {
+        setFormOpen(true)
+        setServiceData({ name: '', description: '', designation: '', img: '', rate: '' })
+    }
+    const modify = async (id) => {
+        setModify(id)
+        await FetchServiceOne(`${backend}/recommendation/fetchOne`, id, setServiceData)
+        setFormOpen(true)
+    }
+    const remove = async (id) => {
+        await removeService(`${backend}/recommendation/remove`, id)
+        fetchAllServiceCard()
+    }
+
+    // on submit for add or modfying data
+    const submit = async (e) => {
+        e.preventDefault()
+        await addService(`${backend}/recommendation`, isModify, setModify, ServiceData)
+        setFormOpen(false)
+        fetchAllServiceCard()
+    }
+
+    // SCROLL LOGIC
     const [isPaused, setIsPaused] = useState(false);
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -15,7 +74,8 @@ export default function Recommendation() {
         window.addEventListener('resize', settingscreenWidth)
         return () => window.removeEventListener('resize', settingscreenWidth)
     }, [])
-    const totalReview = (Recommendations.length)
+    const totalReview = (FetchServices.length)
+
     const [sidx, setIdx] = useState(1);
     const star = (rate, element) => {
         let stars = []
@@ -75,19 +135,24 @@ export default function Recommendation() {
         }, 3000);
 
         return () => clearInterval(interval);
-    }, [ isPaused]);
+    }, [isPaused]);
+
 
 
 
     return (<>
-        <div className=" w-full mt-5 capitalize">
+        {isFormOpen && <ServiceTemplate setFormOpen={setFormOpen} onChange={onChange} field={field} onSubmit={submit} data={ServiceData} />}
+
+        <div className=" w-full mt-5 capitalize relative">
+            <div className="absolute right-0">
+                <Btn color='green' text="add" onClick={add} />
+            </div>
             <div className="text-xl text-textPrimary capitalize ">Recommendations</div>
             {/* cards conatiner */}
             <div className=" flex items-center gap-[15px]  h-[300px] w-full justify-center " onTouchMove={handleTouchMove} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
 
-                {/* cards */}
                 {
-                    Recommendations.map((items, idx) => (
+                    FetchServices.map((items, idx) => (
                         isvisible(idx) && (
                             <div key={idx} className=" flex w-[100%]  md:w-[50%] lg:w-[50%]  flex-shrink-0  flex-col gap-4 p-8 text-sm bg-white/10 min-h-[70%]  relative hover-effect ">
                                 <div className="flex justify-between items-center">
@@ -99,9 +164,13 @@ export default function Recommendation() {
                                         <img className="w-full h-full object-cover " src={items.img} alt="" />
                                     </div>
                                 </div>
-                                <p className="text-textSecondary">{items.desc}</p>
+                                <p className="text-textSecondary">{items.description}</p>
                                 <div className="flex gap-1  w-fit px-2 py-1 rounded-2xl bg-dark">
                                     {star(items.rate, < FaStar className="text-accent" />)}
+                                </div>
+                                <div className="flex justify-between">
+                                    <Btn color='red' text="delete" onClick={() => remove(items._id)} />
+                                    <Btn color='orange' text="modify" onClick={() => modify(items._id)} />
                                 </div>
                             </div>
                         )
@@ -115,7 +184,7 @@ export default function Recommendation() {
             {/* slider with button  */}
             <div className=" text-textPrimary flex justify-center md:justify-between items-center mb-5">
                 <div className="flex gap-2">
-                    {Recommendations.map((element, idx) => (
+                    {FetchServices.map((element, idx) => (
                         <span key={idx} onClick={() => customSlide(idx)} className={`cursor-pointer transition-all duration-300 ease-in-out  w-2 md:w-5 rounded-xl h-1  font-bold ${isvisible(idx) ? 'bg-accent' : 'bg-gray-300'}`}>
                         </span>
                     ))}

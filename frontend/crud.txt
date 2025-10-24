@@ -1,17 +1,12 @@
-
-
-import ServiceTemplate from "../../../utilities/ServiceTemplate"
-import { useEffect, useState } from "react"
-import { MdTitle,MdDescription } from "react-icons/md"
-import { FetchService, removeService, FetchServiceOne, addService } from "../../../utilities/fetchCall"
-import Btn from "../../../utilities/Btn"
-export default function Service() {
-    const backend = import.meta.env.VITE_BACKEND
+ import { FetchService, removeService, FetchServiceOne, addService } from "../../../utilities/fetchCall"
+ import { MdTitle,MdDescription } from "react-icons/md"
+ import ServiceTemplate from "../../utilities/ServiceTemplate";
+ const backend = import.meta.env.VITE_BACKEND
     // to open or close the form
     const [isFormOpen, setFormOpen] = useState(false)
     // for add data from input tag
     const [ServiceData, setServiceData] = useState({ title: '', description: '' })
-    const field = [
+        const field = [
         { name: 'title', type: 'text', Icon: MdTitle },
         { name: 'description', type: 'text', Icon: MdDescription }
     ]
@@ -57,35 +52,30 @@ export default function Service() {
         fetchAllServiceCard()
     }
 
-    return (<>
-        {isFormOpen && <ServiceTemplate setFormOpen={setFormOpen} onChange={onChange} field={field} onSubmit={submit} data={ServiceData} />}
+    {isFormOpen && <ServiceTemplate setFormOpen={setFormOpen} field={field} onChange={onChange} onSubmit={submit} data={ServiceData} />}
 
-        <div className=" w-full mt-5 capitalize relative ">
-
-            <div className="absolute right-0">
+  <div className="absolute right-0">
                 <Btn color='green' text="add" onClick={add} />
             </div>
 
-            <div className="text-xl text-textPrimary capitalize mb-5 ">my serivces</div>
-
-            <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5 ">
-                {
-                    FetchServices.map((e, idx) => (
-                        <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10 hover-effect">
-                            <h1 className="text-textPrimary">{e.title}</h1>
-                            <p className="text-textSecondary">{e.description}</p>
-                            <a href="/contact" className="w-fit text-accent uppercase hover:border-b-2 border-accent">order now &gt;</a>
-
+            
                             <div className="flex justify-between">
                                 <Btn color='red' text="delete" onClick={() => remove(e._id)} />
                                 <Btn color='orange' text="modify" onClick={() => modify(e._id)} />
                             </div>
 
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
+
+import {  MdTitle, MdDescription } from "react-icons/md"
+
+import Form from "../../../utilities/Form"
+export default function ServiceTemplate({ setFormOpen, onSubmit,onChange, data }) {
+    const field = [
+        { name: 'title', type: 'text', Icon: MdTitle },
+        { name: 'description', type: 'text', Icon: MdDescription }
+    ]
+    return (<>
+        <div className="bg-dark/70 backdrop-blur-lg w-full h-full inset-0 absolute z-[119]"></div>
+        <Form actionText='add service' fields={field} setFormOpen={setFormOpen}  onSubmit={onSubmit} onChange={onChange} data={data} />
 
     </>)
 }
