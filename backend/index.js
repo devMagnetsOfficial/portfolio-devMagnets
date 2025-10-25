@@ -27,30 +27,15 @@ app.use('/recommendation', recommendation)
 const service = require('./service/route.js')
 app.use('/service', service)
 
+// mail
+const mail=require('./mail/router.js')
+app.use('/mail',mail)
+
+
 //  index
 app.get('/', (req, res) => {
     res.send('hi buddy')
 })
-
-const email = require('./mail/email.js')
-app.get('/mail', async (req, res) => {
-    const message = {
-        from: process.env.MAIL,
-        to: 'dilip.9540848978@gmail.com',
-        replyTo:'singhabhishek.engineer@gmail.com',
-        subject: 'checking',
-        text: 'done 👌'
-    }
-    try {
-        const response = await email(message)
-        res.json({ success: true, response })
-    } catch (err) {
-        res.json({ err: err, success: false })
-    }
-
-})
-
-
 // listen
 app.listen(PORT, () => {
     console.log("http://localhost:" + PORT)
