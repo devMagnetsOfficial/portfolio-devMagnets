@@ -1,6 +1,7 @@
 // env 
 require('dotenv').config({ path: '' })
 const PORT = process.env.PORT
+
 // db connection
 const db = require('./db/db.js')
 db()
@@ -30,11 +31,16 @@ app.use('/service', service)
 // mail
 const mail=require('./mail/router.js')
 app.use('/mail',mail)
+// ejs
+const ejs=require('ejs')
+app.set('view engine','ejs')
+app.set('views','./view')
+
 
 
 //  index
 app.get('/', (req, res) => {
-    res.send('hi buddy')
+    res.send('hi buddy',mail)
 })
 // listen
 app.listen(PORT, () => {

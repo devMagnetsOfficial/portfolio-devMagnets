@@ -3,45 +3,27 @@ import { FaMessage } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { useState } from "react";
 import { MdPhoneInTalk } from "react-icons/md";
+import mail from "../../utilities/mail";
+import { steps,mentors } from "./mentoshipData";
 export default function Mentorship() {
-    const steps = [
-        { step: 1, desc: 'sign up and tail us your learning goals.' },
-        { step: 2, desc: 'get matched with a mentor based on your needs.' },
-        { step: 3, desc: 'start one-on-one mentorship sessions and grow.' }
-    ]
-    const mentors = [
-        { name: 'amit', designation: 'web development', img: 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/east-indian-young-man-matthew-bamberg.jpg' },
-        { name: 'rahul kumar', designation: 'ui/ux design', img: 'https://tse4.mm.bing.net/th/id/OIP.7ak06e3GyqJthLFeoMkWCQHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3' },
-        { name: 'aansh singh', designation: 'data science', img: 'https://yt3.googleusercontent.com/ytc/AIdro_kXOPTxg8lLuMgEwEpN0WdyjLt17VkEMq_c7-EpVx45qNM=s900-c-k-c0x00ffffff-no-rj' }
-    ]
-    const [Form, SetForm] = useState({ name: '', mail: '', message: '', phoneNo: '' })
+
+
+    const [messageSentStatus, setMessageSentStatus] = useState(false)
+    const Form_Variable = { name: '', mail: '', message: '', phoneNo: '' }
+    const [Form, SetForm] = useState(Form_Variable)
     const onChange = (e) => {
         const { name, value } = e.target
         SetForm((prev) => ({ ...prev, [name]: value }))
-
     }
     const handleSubmit = async (e) => {
+        setMessageSentStatus(true)
         e.preventDefault()
-        try {
-            const res = await fetch('http://localhost:2030/sendMail', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(Form)
-            })
-            const response = await res.json()
-            if (response.success) {
-                alert('message send successfully')
-            }
-            else {
-                alert('message fail to send!')
-            }
-
-        } catch (err) {
-            console.log('err', err)
-        }
+        await mail(Form, 'mentorship')
+        e.target.reset()
+        SetForm(Form_Variable)
+        setMessageSentStatus(false)
     }
+
     return (<>
         <div className="capitalize text-textPrimary text-center  ">
             <h1 className="text-2xl ">join our mentorship program</h1>
@@ -98,7 +80,9 @@ export default function Mentorship() {
                     <div className="w-10  bg-dark   flex pt-4 justify-center"><FaMessage className="text-lg" /></div>
                     <textarea className="min-h-[200px] pl-4 pt-2 bg-darkGray w-full h-10" onChange={onChange} name="message" id="message" placeholder="Goal / Message"></textarea>
                 </label>
-                <button type={'submit'} className="bg-accent w-fit px-10 py-2 capitalize text-dark font-semibold ">Apply</button>
+                <button type={'submit'} className="bg-accent w-fit px-10 py-2 capitalize text-dark font-semibold ">
+                    {messageSentStatus ? 'Applying please wait...' : 'Apply'}
+                </button>
 
             </form>
 

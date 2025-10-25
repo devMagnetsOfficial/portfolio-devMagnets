@@ -1,41 +1,28 @@
 import { FaUser } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
 import { MdEmail, MdPhoneInTalk } from "react-icons/md";
-import { IoIosAdd } from "react-icons/io";
 import { useState } from "react";
 import { TbCoinRupeeFilled } from "react-icons/tb";
 import { PiHandHeartFill } from "react-icons/pi";
-import { RiSubtractFill } from "react-icons/ri";
+import mail from "../../utilities/mail";
 export default function Donate() {
-    const [Form, SetForm] = useState({ name: '', mail: '', message: '', amount: 100 })
 
+    const [messageSentStatus, setMessageSentStatus] = useState(false)
+    const Form_Variable = { name: '', mail: '', message: '', amount: 100 }
+    const [Form, SetForm] = useState(Form_Variable)
     const onChange = (e) => {
         const { name, value } = e.target
         SetForm((prev) => ({ ...prev, [name]: value }))
-
     }
     const handleSubmit = async (e) => {
+        setMessageSentStatus(true)
         e.preventDefault()
-        try {
-            const res = await fetch('http://localhost:2030/donate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(Form)
-            })
-            const response = await res.json()
-            if (response.success) {
-                alert('message send successfully')
-            }
-            else {
-                alert('message fail to send!')
-            }
-
-        } catch (err) {
-            console.log('err', err)
-        }
+        await mail(Form, 'donate')
+        e.target.reset()
+        SetForm(Form_Variable)
+        setMessageSentStatus(false)
     }
+
     return (<>
         <div className="mb-5 flex flex-col gap-2 text-textPrimary ">
             <div className="flex items-center gap-2 text-xl justify-center">
@@ -83,7 +70,7 @@ export default function Donate() {
 
                 {/* submit button */}
                 <button type={'submit'} className=" bg-accent w-fit px-10 py-2 capitalize text-dark font-semibold flex gap-2 items-center ">
-                    <span>Donate Now</span>
+                    <span>  {messageSentStatus ? 'Thankyou! Donating please wait...' : 'Donate Now'}</span>
                 </button>
 
             </form>

@@ -2,12 +2,13 @@ import { FaUser } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { useState } from "react";
-export default function Mail() {
-    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+import mail from "../../utilities/mail";
 
-    const backend = import.meta.env.VITE_BACKEND
+export default function Mail() {
+    
     const [messageSentStatus, setMessageSentStatus] = useState(false)
-    const [Form, SetForm] = useState({ name: '', mail: '', message: '' })
+    const Form_Variable = { name: '', mail: '', message: '' }
+    const [Form, SetForm] = useState(Form_Variable)
     const onChange = (e) => {
         const { name, value } = e.target
         SetForm((prev) => ({ ...prev, [name]: value }))
@@ -15,29 +16,10 @@ export default function Mail() {
     const handleSubmit = async (e) => {
         setMessageSentStatus(true)
         e.preventDefault()
-        await wait(5000)
-        try {
-            const res = await fetch(`${backend}/mail/contact`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(Form)
-            })
-            const response = await res.json()
-            if (response.success) {
-                alert('message send successfully')
-                e.target.reset()
-                SetForm({ name: '', mail: '', message: '' })
-                setMessageSentStatus(false)
-            }
-            else {
-                alert('message fail to send!')
-            }
-
-        } catch (err) {
-            console.log('err', err)
-        }
+        await mail( Form, 'contact')
+        e.target.reset()
+        SetForm(Form_Variable)
+        setMessageSentStatus(false)
     }
     return (<>
         <div className=" text-textPrimary capitalize ">
