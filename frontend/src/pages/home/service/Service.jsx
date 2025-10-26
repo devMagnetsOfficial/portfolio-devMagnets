@@ -2,7 +2,7 @@
 
 import ServiceTemplate from "../../../utilities/ServiceTemplate"
 import { useEffect, useState } from "react"
-import { MdTitle,MdDescription } from "react-icons/md"
+import { MdTitle, MdDescription } from "react-icons/md"
 import { FetchService, removeService, FetchServiceOne, addService } from "../../../utilities/fetchCall"
 import Btn from "../../../utilities/Btn"
 export default function Service() {
@@ -68,23 +68,26 @@ export default function Service() {
 
             <div className="text-xl text-textPrimary capitalize mb-5 ">my serivces</div>
 
-            <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5 ">
-                {
-                    FetchServices.map((e, idx) => (
-                        <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10 hover-effect ">
-                            <h1 className="text-textPrimary">{e.title}</h1>
-                            <p className="text-textSecondary">{e.description}</p>
-                            <a href="/contact" className="w-fit text-accent uppercase hover:border-b-2 border-accent">order now &gt;</a>
+            {FetchServices.length == 0 ?
+                <div className="text-white text-center">no service 🥲</div> :
+                <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5 ">
+                    {
+                        FetchServices.map((e, idx) => (
+                            <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10 hover-effect ">
+                                <h1 className="text-textPrimary">{e.title}</h1>
+                                <p className="text-textSecondary">{e.description}</p>
+                                <a href="/contact" className="w-fit text-accent uppercase hover:border-b-2 border-accent">order now &gt;</a>
 
-                            <div className="flex justify-between">
-                                <Btn color='red' text="delete" onClick={() => remove(e._id)} />
-                                <Btn color='orange' text="modify" onClick={() => modify(e._id)} />
+                                <div className="flex justify-between">
+                                    <Btn color='red' text="delete" onClick={() => remove(e._id)} />
+                                    <Btn color='orange' text="modify" onClick={() => modify(e._id)} />
+                                </div>
+
                             </div>
-
-                        </div>
-                    ))
-                }
-            </div>
+                        ))
+                    }
+                </div>
+            }
         </div>
 
     </>)
