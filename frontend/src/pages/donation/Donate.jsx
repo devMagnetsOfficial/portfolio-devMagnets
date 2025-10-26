@@ -37,29 +37,29 @@ export default function Donate() {
             <form onSubmit={handleSubmit} className="  mb-5 bg-card p-5   gap-5 md:gap-10 min-h-[49vh] flex flex-col">
                 <label htmlFor="name" className="flex items-center">
                     <div className="w-10 h-10 bg-dark  flex items-center justify-center"><FaUser className="text-lg " /></div>
-                    <input className="bg-darkGray w-full h-10 pl-4" type="text" onChange={onChange} name="name" id="name" placeholder="Name" />
+                    <input className="bg-darkGray w-full h-10 pl-4" type="text" onInput={onChange} name="name" id="name" placeholder="Name" />
                 </label>
                 <label htmlFor="mail" className="flex items-center">
                     <div className="w-10 h-10 bg-dark flex items-center justify-center"><MdEmail className="text-lg" /></div>
-                    <input className="bg-darkGray w-full h-10 pl-4" type="text" onChange={onChange} name="mail" id="mail" placeholder="Mail" />
+                    <input className="bg-darkGray w-full h-10 pl-4" type="text" onInput={onChange} name="mail" id="mail" placeholder="Mail" />
                 </label>
 
 
 
                 <label htmlFor="phoneNo" className="flex items-center">
                     <div className="w-10 h-10 bg-dark flex items-center justify-center"><MdPhoneInTalk className="text-lg" /></div>
-                    <input className="bg-darkGray w-full h-10 pl-4" type='tel' onChange={onChange} name="phoneNo" id="phoneNo" placeholder="Phone Number" />
+                    <input className="bg-darkGray w-full h-10 pl-4" type='tel' onInput={onChange} name="phoneNo" id="phoneNo" placeholder="Phone Number" />
                 </label>
 
                 <label htmlFor="amount" className="flex items-center">
                     <div className="w-10 h-10 bg-dark flex items-center justify-center"><TbCoinRupeeFilled className="text-lg" /></div>
-                    <input className="bg-darkGray w-full h-10 pl-4" type="number" onChange={onChange} name="amount" id="amount" placeholder='100' />
+                    <input className="bg-darkGray w-full h-10 pl-4" type="number" onInput={onChange} name="amount" id="amount" placeholder='100' />
                 </label>
 
 
                 <label htmlFor="message" className="flex re">
                     <div className="w-10  bg-dark   flex pt-4 justify-center"><FaMessage className="text-lg" /></div>
-                    <textarea className="min-h-[200px] pl-4 pt-2 bg-darkGray w-full h-10" onChange={onChange} name="message" id="message" placeholder="Message"></textarea>
+                    <textarea className="min-h-[200px] pl-4 pt-2 bg-darkGray w-full h-10" onInput={onChange} name="message" id="message" placeholder="Message"></textarea>
                 </label>
 
                 <span className="flex items-center gap-2 italic text-xs">

@@ -36,7 +36,9 @@ const ejs=require('ejs')
 app.set('view engine','ejs')
 app.set('views','./view')
 
-
+app.get('/mail',(req,res)=>{
+    res.render('donateTemplate', { name:'sdaasd', mail:'er', message:"hi", phoneNo:'23132344', amount:'123' })
+})
 
 //  index
 app.get('/', (req, res) => {

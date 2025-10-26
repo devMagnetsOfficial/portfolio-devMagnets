@@ -1,16 +1,17 @@
 <div
     style="max-width: min(800px,80vw); margin:auto;;font-family: Arial, Helvetica, sans-serif; text-transform: capitalize;">
     <div
-        style="background-color: #ffcc00;border-top-left-radius: 34px;border-top-right-radius: 34px; ;font-size: 40px;padding:0 25px">
+        style="background-color: #ffcc00;border-top-left-radius: 34px;border-top-right-radius: 34px; ;font-size: 32px;padding:4px 25px">
         thanks <%= name %>
     </div>
     <table cellpadding="2" cellspacing="20"
-        style=" padding: 3%; background-color: #2a2d36;color: white;font-family: Arial, Helvetica, sans-serif; font-size: 14px;padding: 24px;">
+        style="  background-color: #2a2d36;color: white;font-family: Arial, Helvetica, sans-serif; font-size: 12px;padding: 2%;">
 
         <tr>
             <td>
                 <p>
-                    I received your <span style="color:#ffcc00 ;font-size: larger;font-weight: bold;"> <%= form %>
+                    I received your <span style="color:#ffcc00 ;font-size: larger;font-weight: bold;">
+                        <%= form %>
                     </span>
                     submission.
                     Thank you for reaching out — I really appreciate you taking the time.
@@ -23,7 +24,9 @@
         <tr>
             <td style="padding: 3%; backdrop-filter: blur(10px);background-color: gray; ">
                 <div> <span style="color:#ffcc00 ;font-size: larger;font-weight: bold;">Your message </span></div>
-                <p><%= message %></p>
+                <p>
+                    <%= message %>
+                </p>
             </td>
         </tr>
 
@@ -38,12 +41,12 @@
                 </p>
             </td>
         </tr>
-        <tr>
+       <tr>
             <td>
-                <button
-                    style="text-transform: capitalize;background-color:#ffcc00 ;font-weight: bold;border-radius: 16px;padding: 3%;color:#2a2d36">
-                    reply / follow up
-                </button>
+                <a href="mailto:MagnetsDev@gmail.com"
+                    style="display: inline-block; text-transform: capitalize; background-color: #ffcc00; font-weight: bold; border-radius: 16px; padding: 15px 20px; color:#2a2d36; text-decoration: none;">
+                    Reply / Follow up
+                </a>
             </td>
         </tr>
 
@@ -52,12 +55,12 @@
     <div
         style="background-color: gray;;;padding: 3%;font-size: 10px;text-align: center;border-bottom-left-radius: 34px;border-bottom-right-radius: 34px;">
         If you didn’t make this request, ignore this message or contact us at
-        <a style="text-decoration: none ;color:gray"
-            href='mailto:MagnetsDev@gmail.com'>MagnetsDev@gmail.com
-        </a>
+        <a style="text-decoration: none ;color:#ffcc00;font-size: larger;font-weight: bold;" href='mailto:MagnetsDev@gmail.com'>MagnetsDev@gmail.com
+        </a> &copy; devMagnets.
+        <br>
 
         <div>
-            &copy; devMagnets.All rights reserveds
+            All rights reserveds
         </div>
     </div>
 </div>
