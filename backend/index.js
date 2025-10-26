@@ -27,7 +27,12 @@ app.use('/recommendation', recommendation)
 // service
 const service = require('./service/route.js')
 app.use('/service', service)
-
+// education
+const educationRoute = require('./education/router.js')
+app.use('/education', educationRoute)
+// history
+const historyRoute = require('./history/route.js')
+app.use('/history', historyRoute)
 // mail
 const mail=require('./mail/router.js')
 app.use('/mail',mail)
