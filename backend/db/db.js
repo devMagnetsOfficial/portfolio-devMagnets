@@ -1,7 +1,7 @@
 // db
 const mongoose = require('mongoose')
 const MONGODATABASE_LINK = process.env.MONGODATABASE_LINK
-console.log(MONGODATABASE_LINK)
+
 const db = async () => {
     try {
         await mongoose.connect(MONGODATABASE_LINK)

@@ -1,4 +1,4 @@
-const recommendationModel = require("./recommendationModel")
+const recommendationModel = require("./recommendationmodel")
 const fetch = async (req, res) => {
     try {
         const Data = await recommendationModel.find()
