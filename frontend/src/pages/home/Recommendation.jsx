@@ -2,105 +2,107 @@ import { FaStar } from "react-icons/fa6";
 import { FaLessThan, FaGreaterThan } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import ServiceTemplate from "../../utilities/ServiceTemplate";
-import { MdTitle, MdDescription } from "react-icons/md"
-import { FetchService, removeService, FetchServiceOne, addService } from "../../utilities/fetchCall"
-import Recommendations from "./recommendData";
+import { MdTitle, MdDescription } from "react-icons/md";
+import { FetchService, removeService, FetchServiceOne, addService } from "../../utilities/fetchCall";
 import Btn from "../../utilities/Btn";
 
 export default function Recommendation() {
-    const backend = import.meta.env.VITE_BACKEND
-    // to open or close the form
-    const [isFormOpen, setFormOpen] = useState(false)
-    // for add data from input tag
-    const [ServiceData, setServiceData] = useState({ name: '', description: '', designation: '', img: '', rate: '' })
+    const backend = import.meta.env.VITE_BACKEND;
+
+    // ====== STATES ======
+    const [isFormOpen, setFormOpen] = useState(false);
+    const [ServiceData, setServiceData] = useState({
+        name: "",
+        description: "",
+        designation: "",
+        img: "",
+        rate: ""
+    });
+    const [FetchServices, setFetchServices] = useState([]);
+    const [isModify, setModify] = useState(null);
+
+    // ====== INPUT FIELDS ======
     const field = [
-        { name: 'name', type: 'text', Icon: MdTitle },
-        { name: 'description', type: 'text', Icon: MdDescription },
-        { name: 'designation', type: 'text', Icon: MdTitle },
-        { name: 'img', type: 'text', Icon: MdDescription },
-        { name: 'rate', type: 'text', Icon: MdTitle },
+        { name: "name", type: "text", Icon: MdTitle },
+        { name: "description", type: "text", Icon: MdDescription },
+        { name: "designation", type: "text", Icon: MdTitle },
+        { name: "img", type: "text", Icon: MdDescription },
+        { name: "rate", type: "number", Icon: MdTitle },
+    ];
 
-    ]
-    // for display added data
-    const [FetchServices, setFetchServices] = useState([])
-    // for modifying 
-    const [isModify, setModify] = useState()
-    // handle input change
-    const onChange = (e) => {
-        const { name, value } = e.target
-        setServiceData((prev) => ({ ...prev, [name]: value }))
-        console.log(ServiceData)
-    }
-    // fetch all card 
+    // ====== FETCH ALL SERVICES ======
     const fetchAllServiceCard = async () => {
-        FetchService(`${backend}/recommendation/fetch`, setFetchServices)
-    }
+        await FetchService(`${backend}/recommendation/fetch`, setFetchServices);
+    };
+
     useEffect(() => {
-        fetchAllServiceCard()
-        console.log(FetchServices)
-    }, [])
+        fetchAllServiceCard();
+    }, []);
 
+    // ====== INPUT CHANGE ======
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setServiceData((prev) => ({ ...prev, [name]: value }));
+    };
 
+    // ====== ADD / MODIFY FORM HANDLERS ======
     const add = () => {
-        setFormOpen(true)
-        setServiceData({ name: '', description: '', designation: '', img: '', rate: '' })
-    }
+        setModify(null);
+        setServiceData({ name: "", description: "", designation: "", img: "", rate: "" });
+        setFormOpen(true);
+    };
+
     const modify = async (id) => {
-        setModify(id)
-        await FetchServiceOne(`${backend}/recommendation/fetchOne`, id, setServiceData)
-        setFormOpen(true)
-    }
+        setModify(id);
+        await FetchServiceOne(`${backend}/recommendation/fetchOne`, id, setServiceData);
+        setFormOpen(true);
+    };
+
     const remove = async (id) => {
-        await removeService(`${backend}/recommendation/remove`, id)
-        fetchAllServiceCard()
-    }
+        await removeService(`${backend}/recommendation/remove`, id);
+        fetchAllServiceCard();
+    };
 
-    // on submit for add or modfying data
+    // ====== FORM SUBMIT ======
     const submit = async (e) => {
-        e.preventDefault()
-        await addService(`${backend}/recommendation`, isModify, setModify, ServiceData)
-        setFormOpen(false)
-        fetchAllServiceCard()
-    }
+        e.preventDefault();
+        await addService(`${backend}/recommendation`, isModify, setModify, ServiceData);
+        setFormOpen(false);
+        fetchAllServiceCard();
+    };
 
-    // SCROLL LOGIC
+    // ====== SLIDER LOGIC ======
     const [isPaused, setIsPaused] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [sidx, setIdx] = useState(0);
 
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-    const settingscreenWidth = () => {
-        return setScreenWidth(window.innerWidth)
-    }
+    const totalReview = FetchServices.length;
+
+    // handle resize
     useEffect(() => {
-        window.addEventListener('resize', settingscreenWidth)
-        return () => window.removeEventListener('resize', settingscreenWidth)
-    }, [])
-    const totalReview = (FetchServices.length)
+        const handleResize = () => setScreenWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
-    const [sidx, setIdx] = useState(1);
-    const star = (rate, element) => {
-        let stars = []
-        for (let i = 1; i <= rate; i++) {
-            stars.push(<span key={i}>{element}</span>)
-        }
-        return stars
-    }
     const rightSlide = () => {
-        setIdx((sidx + 1) % totalReview)
-        console.log(sidx)
-    }
+        setIdx((prev) => (prev + 1) % totalReview);
+    };
+
     const leftSlide = () => {
-        setIdx((sidx - 1 + totalReview) % totalReview)
-        console.log(sidx)
-    }
+        setIdx((prev) => (prev - 1 + totalReview) % totalReview);
+    };
+
     const customSlide = (idx) => {
-        setIdx(idx)
-    }
-    const isvisible = (idx) => {
-        return (sidx === idx ||
-            ((screenWidth >= 768) && sidx === (idx + 1) % totalReview)
-        )
-    }
-    // For touch events
+        setIdx(idx);
+    };
+
+    const isVisible = (idx) => {
+        if (totalReview === 0) return false;
+        return sidx === idx || (screenWidth >= 768 && sidx === (idx + 1) % totalReview);
+    };
+
+    // ====== TOUCH SWIPE ======
     const [touchStartX, setTouchStartX] = useState(0);
     const [touchEndX, setTouchEndX] = useState(0);
 
@@ -111,92 +113,113 @@ export default function Recommendation() {
 
     const handleTouchMove = (e) => {
         setTouchEndX(e.touches[0].clientX);
-        setIsPaused(false);
     };
-
 
     const handleTouchEnd = () => {
         const distance = touchStartX - touchEndX;
-        const threshold = 50; // minimum swipe distance
-
-        if (distance > threshold) {
-            // swiped left → next slide
-            rightSlide();
-        } else if (distance < -threshold) {
-            // swiped right → previous slide
-            leftSlide();
-        }
+        const threshold = 50;
+        if (distance > threshold) rightSlide();
+        else if (distance < -threshold) leftSlide();
+        setIsPaused(false);
     };
+
+    // ====== AUTO SLIDE ======
     useEffect(() => {
-        if (isPaused) return; // skip interval when paused
-
+        if (isPaused || totalReview === 0) return;
         const interval = setInterval(() => {
-            setIdx(prev => (prev + 1) % totalReview);
+            setIdx((prev) => (prev + 1) % totalReview);
         }, 3000);
-
         return () => clearInterval(interval);
-    }, [isPaused]);
+    }, [isPaused, totalReview]);
 
+    // ====== STAR GENERATOR ======
+    const star = (rate) => {
+        const stars = [];
+        for (let i = 1; i <= rate; i++) {
+            stars.push(<FaStar key={i} className="text-accent" />);
+        }
+        return stars;
+    };
 
+    // ====== RENDER ======
+    return (
+        <>
+            {isFormOpen && (
+                <ServiceTemplate
+                    setFormOpen={setFormOpen}
+                    onChange={onChange}
+                    field={field}
+                    onSubmit={submit}
+                    data={ServiceData}
+                />
+            )}
 
+            <div className="w-full mt-5 capitalize relative">
+                <div className="absolute right-0">
+                    <Btn color="green" text="add" onClick={add} />
+                </div>
+                <div className="text-xl text-textPrimary capitalize">Recommendations</div>
 
-    return (<>
-        {isFormOpen && <ServiceTemplate setFormOpen={setFormOpen} onChange={onChange} field={field} onSubmit={submit} data={ServiceData} />}
-
-        <div className=" w-full mt-5 capitalize relative">
-            <div className="absolute right-0">
-                <Btn color='green' text="add" onClick={add} />
-            </div>
-            <div className="text-xl text-textPrimary capitalize ">Recommendations</div>
-            {/* cards conatiner */}
-            <div className=" flex items-center gap-[15px]  h-[300px] w-full justify-center " onTouchMove={handleTouchMove} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-
-                {
-                    FetchServices.map((items, idx) => (
-                        isvisible(idx) && (
-                            <div key={idx} className=" flex w-[100%]  md:w-[50%] lg:w-[50%]  flex-shrink-0  flex-col gap-4 p-8 text-sm bg-white/10 min-h-[70%]  relative hover-effect ">
-                                <div className="flex justify-between items-center">
-                                    <div className="text-textPrimary">
-                                        <h1 className="font-semibold " >{items.name}</h1>
-                                        <h2 className="text-textSecondary">{items.designation}</h2>
+                {/* ====== CARDS CONTAINER ====== */}
+                <div
+                    className="flex items-center gap-5 h-[300px] w-full justify-center"
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                >
+                    {totalReview === 0 ? (
+                        <div className="text-textSecondary">No recommendations yet.</div>
+                    ) : (
+                        FetchServices.map((item, idx) =>
+                            isVisible(idx) ? (
+                                <div
+                                    key={idx}
+                                    className="flex w-full md:w-[50%] flex-col gap-4 p-8 text-sm bg-white/10 min-h-[70%] relative"
+                                >
+                                    <div className="flex justify-between items-center">
+                                        <div className="text-textPrimary">
+                                            <h1 className="font-semibold">{item.name}</h1>
+                                            <h2 className="text-textSecondary">{item.designation}</h2>
+                                        </div>
+                                        <div className="w-[70px] bg-dark overflow-hidden aspect-square rounded-full absolute right-5 -top-4">
+                                            <img className="w-full h-full object-cover" src={item.img} alt="" />
+                                        </div>
                                     </div>
-                                    <div className="w-[50px] lg:w-[70px] bg-dark  overflow-hidden aspect-[1/1] rounded-[100%] absolute right-5 lg:right-10 -top-4 ">
-                                        <img className="w-full h-full object-cover " src={items.img} alt="" />
+                                    <p className="text-textSecondary">{item.description}</p>
+                                    <div className="flex gap-1 w-fit px-2 py-1 rounded-2xl bg-dark">
+                                        {star(item.rate)}
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <Btn color="red" text="delete" onClick={() => remove(item._id)} />
+                                        <Btn color="orange" text="modify" onClick={() => modify(item._id)} />
                                     </div>
                                 </div>
-                                <p className="text-textSecondary">{items.description}</p>
-                                <div className="flex gap-1  w-fit px-2 py-1 rounded-2xl bg-dark">
-                                    {star(items.rate, < FaStar className="text-accent" />)}
-                                </div>
-                                <div className="flex justify-between">
-                                    <Btn color='red' text="delete" onClick={() => remove(items._id)} />
-                                    <Btn color='orange' text="modify" onClick={() => modify(items._id)} />
-                                </div>
-                            </div>
+                            ) : null
                         )
-
-                    ))
-                }
-
-
-            </div>
-
-            {/* slider with button  */}
-            <div className=" text-textPrimary flex justify-center md:justify-between items-center mb-5">
-                <div className="flex gap-2">
-                    {FetchServices.map((element, idx) => (
-                        <span key={idx} onClick={() => customSlide(idx)} className={`cursor-pointer transition-all duration-300 ease-in-out  w-2 md:w-5 rounded-xl h-1  font-bold ${isvisible(idx) ? 'bg-accent' : 'bg-gray-300'}`}>
-                        </span>
-                    ))}
+                    )}
                 </div>
 
-                <div className="hidden md:flex text-textSecondary items-center gap-3">
-                    <FaLessThan onClick={leftSlide} className="text-gray-500 hover:text-white" />
-                    <FaGreaterThan onClick={rightSlide} className="text-gray-500 hover:text-white" />
-                </div>
+                {/* ====== SLIDER BUTTONS ====== */}
+                {totalReview > 1 && (
+                    <div className="text-textPrimary flex justify-center md:justify-between items-center mb-5">
+                        <div className="flex gap-2">
+                            {FetchServices.map((_, idx) => (
+                                <span
+                                    key={idx}
+                                    onClick={() => customSlide(idx)}
+                                    className={`cursor-pointer w-3 md:w-5 h-1 rounded-xl transition-all duration-300 ${
+                                        isVisible(idx) ? "bg-accent" : "bg-gray-400"
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                        <div className="hidden md:flex text-textSecondary items-center gap-3">
+                            <FaLessThan onClick={leftSlide} className="text-gray-500 hover:text-white cursor-pointer" />
+                            <FaGreaterThan onClick={rightSlide} className="text-gray-500 hover:text-white cursor-pointer" />
+                        </div>
+                    </div>
+                )}
             </div>
-
-        </div>
-    </>)
-
+        </>
+    );
 }
