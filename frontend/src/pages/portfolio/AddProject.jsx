@@ -101,10 +101,13 @@ export default function AddProject({
             value={Project.category || ""}
           >
             <option value="">Select category</option>
-            <option value="portfolio">portfolio</option>
-            <option value="business">business</option>
-            <option value="utilities">utilities</option>
-            <option value="other">other</option>
+            <option value="portfolio website">Portfolio Website</option>
+            <option value="business website">Business Website</option>
+            <option value="e-commerce website">E-commerce Website</option>
+            <option value="landing page">Landing Page</option>
+            <option value="non profit website">Non Profit Website</option>
+            <option value="utilities">Utilities</option>
+            <option value="other">Other</option>
           </select>
         </label>
 

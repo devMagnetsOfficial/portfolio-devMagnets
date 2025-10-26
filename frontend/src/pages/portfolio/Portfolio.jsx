@@ -5,12 +5,22 @@ export default function Portfolio() {
     const [isProjectHover, setProjectHover] = useState(null);
     const [projects, setProjects] = useState([]);
     const backend = import.meta.env.VITE_BACKEND
+    const [filter, setFilter] = useState('')
+    const changeFilter = (x) => {
+        setFilter(x)
+    }
 
     // Fetch all projects
     const fetchProjects = async () => {
         console.log("fetching projects ....");
         try {
-            const req = await fetch(`${backend}/portfolio/fetch`, { method: "GET" });
+            const req = await fetch(`${backend}/portfolio/fetch`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ filter })
+            });
             const res = await req.json();
             if (res.success) {
                 setProjects(res.projects);
@@ -24,7 +34,7 @@ export default function Portfolio() {
 
     useEffect(() => {
         fetchProjects();
-    }, []);
+    }, [filter]);
 
     // Admin mode toggle
     const [isAdmin] = useState(true);
@@ -92,7 +102,7 @@ export default function Portfolio() {
     const addProjectsOnSubmit = async (e) => {
         e.preventDefault();
         const endPoint = selectProject === "new project" ? "add" : "modify";
-        const method=selectProject === "new project" ? "POST" : "PATCH";
+        const method = selectProject === "new project" ? "POST" : "PATCH";
         const data =
             selectProject === "new project" ? Project : { ...Project, id: modify };
 
@@ -152,11 +162,13 @@ export default function Portfolio() {
             <div className="capitalize text-textPrimary mt-5">
                 {/* Filter */}
                 <ul className="grid grid-cols-2 text-xs gap-2 lg:grid-cols-5 lg:text-sm mb-5">
-                    <li>All categories</li>
-                    <li>web templates</li>
-                    <li>ui elements</li>
-                    <li>logos</li>
-                    <li>drawing</li>
+                    {
+                        ['all websites', 'business website', 'e-commerce website', 'portfolio website', 'non profit website', 'landing page', 'utilities', 'other'].map((e, idx) => (
+                            <li key={idx} className={` text-center border rounded-xl p-2  transition-all cursor-pointer ${filter === e ? 'bg-accent text-dark font-semibold' : 'bg-accent/10 hover:bg-accent  hover:text-bg'}`} onClick={() => changeFilter(e)}>
+                                {e}
+                            </li>
+                        ))
+                    }
                 </ul>
 
                 {/* Add Button */}
@@ -179,54 +191,56 @@ export default function Portfolio() {
                 </div>
 
                 {/* Project Cards */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                    {projects.map((project, idx) => (
-                        <div
-                            key={idx}
-                            onMouseEnter={() => setProjectHover(idx)}
-                            onMouseLeave={() => setProjectHover(null)}
-                            className="min-h-[250px] relative overflow-hidden"
-                        >
-                            <img
-                                className="w-full h-full object-cover"
-                                src={project.img}
-                                alt=""
-                            />
-                            {isProjectHover === idx && (
-                                <div className="font-semibold min-h-[50px] p-5 absolute bottom-0 bg-dark/70 w-full">
-                                    <h1>{project.title}</h1>
-                                    <div className="text-xs text-gray-400">
-                                        {project.description}
-                                    </div>
-                                    <a
-                                        href={project.link}
-                                        className="text-sm text-accent cursor-pointer hover:border-b-2 pb-1 w-fit border-accent"
-                                    >
-                                        link &gt;
-                                    </a>
-                                    <div className="flex">
-                                        <div
-                                            className="mx-auto text-xs text-red-600 bg-red-400 w-fit px-4 py-2 rounded-3xl hover:bg-red-600 hover:text-red-400 cursor-pointer"
-                                            onClick={() => deleteProject(project._id)}
-                                        >
-                                            delete
+                {projects.length == 0 ? <div className="capitalize text-center">no {filter} projects in portfolio 🥲</div> :
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                        {projects.map((project, idx) => (
+                            <div
+                                key={idx}
+                                onMouseEnter={() => setProjectHover(idx)}
+                                onMouseLeave={() => setProjectHover(null)}
+                                className="min-h-[250px] relative overflow-hidden"
+                            >
+                                <img
+                                    className="w-full h-full object-cover"
+                                    src={project.img}
+                                    alt=""
+                                />
+                                {isProjectHover === idx && (
+                                    <div className="font-semibold min-h-[50px] p-5 absolute bottom-0 bg-dark/70 w-full">
+                                        <h1>{project.title}</h1>
+                                        <div className="text-xs text-gray-400">
+                                            {project.description}
                                         </div>
-                                        <div
-                                            className="mx-auto text-xs text-orange-600 bg-orange-400 w-fit px-4 py-2 rounded-3xl hover:bg-orange-600 hover:text-orange-400 cursor-pointer"
-                                            onClick={async () => {
-                                                setModify(project._id);
-                                                await modifiedfetchProjects(project._id);
-                                                setSelectProject("modify project");
-                                            }}
+                                        <a
+                                            href={project.link}
+                                            className="text-sm text-accent cursor-pointer hover:border-b-2 pb-1 w-fit border-accent"
                                         >
-                                            modify
+                                            link &gt;
+                                        </a>
+                                        <div className="flex">
+                                            <div
+                                                className="mx-auto text-xs text-red-600 bg-red-400 w-fit px-4 py-2 rounded-3xl hover:bg-red-600 hover:text-red-400 cursor-pointer"
+                                                onClick={() => deleteProject(project._id)}
+                                            >
+                                                delete
+                                            </div>
+                                            <div
+                                                className="mx-auto text-xs text-orange-600 bg-orange-400 w-fit px-4 py-2 rounded-3xl hover:bg-orange-600 hover:text-orange-400 cursor-pointer"
+                                                onClick={async () => {
+                                                    setModify(project._id);
+                                                    await modifiedfetchProjects(project._id);
+                                                    setSelectProject("modify project");
+                                                }}
+                                            >
+                                                modify
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                }
             </div>
         </>
     );

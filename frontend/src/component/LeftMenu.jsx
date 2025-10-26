@@ -2,26 +2,27 @@ import { FaDownload, FaGithub, FaLinkedin, FaCheck } from "react-icons/fa";
 import { FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
 import { PiDotsThreeVerticalBold } from "react-icons/pi";
 import { useEffect, useState } from "react";
+import { NavLink } from 'react-router-dom'
 export default function LeftMenu() {
   const [isMenuClicked, setMenuClicked] = useState(true)
 
   useEffect(() => {
 
     handleScreen()
-     window.addEventListener("resize", handleScreen)
+    window.addEventListener("resize", handleScreen)
 
-  // cleanup
-  return () => window.removeEventListener("resize", handleScreen)
+    // cleanup
+    return () => window.removeEventListener("resize", handleScreen)
   }, [])
 
-    const handleScreen = () => {
-      if (window.innerWidth >= 768) {
-        setMenuClicked(true)
-      }
-      else {
-        setMenuClicked(false)
-      }
+  const handleScreen = () => {
+    if (window.innerWidth >= 768) {
+      setMenuClicked(true)
     }
+    else {
+      setMenuClicked(false)
+    }
+  }
 
   const setMenu = () => {
     setMenuClicked(!isMenuClicked)
@@ -35,16 +36,17 @@ export default function LeftMenu() {
       {isMenuClicked && <>
         {/* brief bio */}
         <div className=" flex items-center justify-center h-[35%] ">
-          <div className="flex flex-col items-center gap-2">
-            <img className="w-[100px] h-[100px] rounded-[100%] object-cover object-top " src="https://st.depositphotos.com/1011643/4430/i/950/depositphotos_44309759-stock-photo-young-indian-man-outdoors.jpg" alt="" />
-            <h1 className="text-lg font-semibold">abhishek singh</h1>
-            <div className="text-[#cacace] ">
-              <p>mern developer</p>
-              <p>ui/ux designer</p>
+          <NavLink to='/'>
+            <div className="flex flex-col items-center gap-2">
+              <img className="w-[100px] h-[100px] rounded-[100%] object-cover object-top " src="https://st.depositphotos.com/1011643/4430/i/950/depositphotos_44309759-stock-photo-young-indian-man-outdoors.jpg" alt="" />
+              <h1 className="text-lg font-semibold">abhishek singh</h1>
+              <div className="text-[#cacace] ">
+                <p>mern developer</p>
+                <p>ui/ux designer</p>
+              </div>
             </div>
-          </div>
+          </NavLink>
         </div>
-
         {/* scroll inside brief bio and social media link */}
         <div className="h-[55%] p-4 overflow-scroll overflow-x-hidden bg-white/10 ">
 

@@ -57,27 +57,32 @@ export default function Mails() {
                 </ul>
             </div>
             <div className=" text-center capitalize my-6 text-accent">  {filter} Email</div>
-            <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5 ">
 
-                {
-                    email.map((e, idx) => (
-                        <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10 hover-effect">
-                            <h1 className="text-textPrimary text-center">{e.name} <br /> ( {e.mail} )</h1>
 
-                            <p className="text-textSecondary">{e.message}</p>
-                            <div className="flex items-center justify-between">
-                                <a href={`mailto:${e.mail}`} className="w-fit text-accent uppercase hover:border-b-2 border-accent">reply&gt;</a>
-                                <Btn color='red' text='delete' onClick={
-                                    () => {
-                                        delEmail(e._id)
-                                        fetchEmail()
-                                    }
-                                } />
+            {
+                email.length != 0 ?
+                    <div className=" grid grid-cols-1 lg:grid-cols-3 gap-5 ">
+                        {email.map((e, idx) => (
+                            <div key={idx} className=" flex flex-col gap-4 p-8 text-sm bg-white/10 hover-effect">
+                                <h1 className="text-textPrimary text-center">{e.name} <br /> ( {e.mail} )</h1>
+
+                                <p className="text-textSecondary">{e.message}</p>
+                                <div className="flex items-center justify-between">
+                                    <a href={`mailto:${e.mail}`} className="w-fit text-accent uppercase hover:border-b-2 border-accent">reply&gt;</a>
+                                    <Btn color='red' text='delete' onClick={
+                                        () => {
+                                            delEmail(e._id)
+                                            fetchEmail()
+                                        }
+                                    } />
+                                </div>
                             </div>
-                        </div>
-                    ))
-                }
-            </div>
+                        ))}
+                    </div>
+                    :
+                    <div className="capitalize text-white text-center ">no {filter} mails 🥲</div>
+            }
+
         </>
     );
 }
