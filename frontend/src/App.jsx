@@ -7,13 +7,14 @@ import Blog from "./pages/blog/Blog"
 import History from "./pages/history/History"
 import Donation from "./pages/donation/Donate"
 import MentorShip from "./pages/mentorship/Mentorship"
+import Mails from "./pages/mails/Mails"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 export default function App() {
   return (<>
 
     <BrowserRouter>
       <Routes>
-        <Route element={<PublicLayout/>}>
+        <Route element={<PublicLayout />}>
           <Route path='/' element={<Home />} />
           <Route path='/portfolio' element={<Portfolio />} />
           <Route path='history' element={<History />} />
@@ -21,10 +22,11 @@ export default function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/donate' element={<Donation />} />
           <Route path='/mentorship' element={<MentorShip />} />
+          <Route path='/mails' element={<Mails />} />
           <Route path='*' element={<><div>page is under construction</div></>} />
         </Route>
       </Routes>
     </BrowserRouter>
   </>)
-// fetch modify data while modifing ata i service page to be done
+  // fetch modify data while modifing ata i service page to be done
 }

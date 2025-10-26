@@ -58,4 +58,36 @@ const mentorship = async (req, res) => {
         res.json({ err, success: false })
     }
 }
-module.exports = { contact, donate, mentorship }
+const fetch = async (req, res) => {
+    try {
+        const filter = req.body.filter
+        let model
+        if (filter === 'contact') model = contactModel
+        else if (filter === 'donate') model = donateModel
+        else if (filter === 'mentorship') model = mentorshipModel
+        else return res.status(400).json({ success: false, message: 'Invalid filter type' })
+
+        const data = await model.find()
+        res.json(data)
+    } catch (err) {
+        res.json({ err, success: false })
+    }
+}
+const remove = async (req, res) => {
+    const {id,filter} = req.params
+    try {
+    
+        let model
+        if (filter === 'contact') model = contactModel
+        else if (filter === 'donate') model = donateModel
+        else if (filter === 'mentorship') model = mentorshipModel
+        else return res.status(400).json({ success: false, message: 'Invalid filter type' })
+
+        await model.deleteOne({ _id: id })
+        res.json({ success: true })
+    } catch (err) {
+        console.log(err)
+        res.json({ err, success: false })
+    }
+}
+module.exports = { contact, donate, mentorship, fetch, remove }

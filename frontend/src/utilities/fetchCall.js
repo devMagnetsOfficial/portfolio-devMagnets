@@ -1,4 +1,5 @@
 const addService = async (URL, isModify, setModify, UserInputData) => {
+    const backend = import.meta.env.VITE_BACKEND
     try {
         const isAdd = !isModify ? '/add' : '/modify'
         URL += isAdd
@@ -41,6 +42,7 @@ const FetchService = async (URL, setData) => {
         if (res.success) {
             setData(res.Data)
         }
+    
 
     } catch (err) {
         console.log(res.err)

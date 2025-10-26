@@ -47,6 +47,12 @@ export default function RightMenu() {
                                     <NavLink to='/mentorship' className={({ isActive }) => (isActive ? 'text-[white]  font-semibold' : '')}>MentorShip</NavLink>
                                 </ul>
                             </div>
+                            <hr className="bg-textSecondary w-full h-[1px] my-5" />
+                            <div className=" w-full p-5 text-sm ">
+                                <ul className="flex flex-col gap-2 ">
+                                    <NavLink to='/mails' className={({ isActive }) => (isActive ? 'text-white  font-semibold ' : '')}>Mails</NavLink>
+                                </ul>
+                            </div>
                         </div>
                     </>
                 }
